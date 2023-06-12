@@ -2,7 +2,8 @@ import {
   createBrowserRouter,
   RouterProvider,
   Routes,
-  Route
+  Route,
+  Outlet
 } from "react-router-dom";
 import { Home, Login } from '@/pages/index'
 import Layout from '@/layout'
@@ -19,7 +20,7 @@ export default Router
 
 function Root() {
   return (
-     <Routes>
+    <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -27,3 +28,4 @@ function Root() {
     </Routes>
   )
 }
+

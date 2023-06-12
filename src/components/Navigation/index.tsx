@@ -1,18 +1,7 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components';
-import { NavLinksUl } from './NavLinksStyle'
-
-export const NavigationStyle = styled.div`
- width: 100%;
- height: 5vh;
- background: ${props => props.theme.navbarColor};
-
- h3 {
-  margin: 0;
-  padding: 0;
- }
-`
+import { NavigationStyle, NavLinksUl } from './NavbarStyle'
+import SignupButton from '@/components/SignUpButton'
 
 const Navigation = () => {
   return (
@@ -20,11 +9,15 @@ const Navigation = () => {
       <Link to="/">LUNA</Link>
         <NavLinksUl>
           <li>
-            <Link to='/login'>Login</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li>
-            <Link to='/register'>Register</Link>
+            <Link to='/search'>Search</Link>
           </li>
+          <li>
+            <Link to='/profile'>Profile</Link>
+          </li>
+         <SignupButton />
         </NavLinksUl>
     </NavigationStyle>
   )

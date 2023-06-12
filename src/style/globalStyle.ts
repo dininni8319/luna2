@@ -12,11 +12,22 @@ export const globalStyle = createGlobalStyle`
     box-sizing: border-box;
     background-color: #F7F8FA;
   }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+  }
 `
 
 export const Theme = {
     navbarColor: 'white',
+    buttonColor: "#E47D31",
     footerColor: '#272D36',
+    
     borderColor: '#F2F2F2',
     textColorGrey: 'rgba(255,255,255,0.8)',
     //color for the input and line bottom
@@ -25,8 +36,6 @@ export const Theme = {
     bodyBackgroundColor: 'rgba(222,222,222)',
     //not in use
     backgroundGrayColor: '#F1F2F6',
-    buttonColor: '#fca311',
-    blueColor: '',
     grayInputText: '#888888',
     linkColor: '#03045e',
     //////////////
@@ -39,6 +48,7 @@ export const Theme = {
     colorWhite: 'white',
     blackColor: 'black',
     orangeColor: '#fc8414',
+
     //We could usse this colour for the text, they are not in use at the moment!
     textGray: '#1C1C1C',
     disabledColor: 'rgb(255, 213, 128, 0.8)',

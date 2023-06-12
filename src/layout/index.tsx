@@ -1,14 +1,11 @@
 import Navigation from '@/components/Navigation'
+import { Outlet } from 'react-router-dom'
 
-interface Props {
-  children: JSX.Element
-}
-
-const MainLayout = ({ children }: Props) => {
+const MainLayout = () => {
   return (
     <>
       <Navigation />
-      {children}
+      <Outlet />
     </>
   )
 }
