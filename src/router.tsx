@@ -5,7 +5,13 @@ import {
   Route,
   Outlet
 } from "react-router-dom";
-import { Home, Login } from '@/pages/index'
+import { 
+  Home, 
+  Login, 
+  Register,
+  Search,
+  Profile 
+} from '@/pages/index'
 import Layout from '@/layout'
 
 const router = createBrowserRouter([
@@ -24,6 +30,9 @@ function Root() {
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   )

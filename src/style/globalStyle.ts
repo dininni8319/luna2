@@ -14,7 +14,7 @@ export const globalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: inherit;
+    color: #646363;
   }
   
   ul {
@@ -24,11 +24,11 @@ export const globalStyle = createGlobalStyle`
 
 export const Theme = {
     navbarColor: 'white',
-    buttonColor: "#E47D31",
+    buttonColor: '#E47D31',
     footerColor: '#272D36',
-    
+
     borderColor: '#F2F2F2',
-    textColorGrey: 'rgba(255,255,255,0.8)',
+    textGrey: '#646363',
     //color for the input and line bottom
     borderGrayColor: '#e5e5e5',
     textShadow: 'text-shadow:  5px 5px 11px rgba(0,0,0,1)',
