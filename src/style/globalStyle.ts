@@ -1,7 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const globalStyle = createGlobalStyle`
-  
   * {
     font-family: 'Roboto', sans-serif;
   }

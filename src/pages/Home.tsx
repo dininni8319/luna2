@@ -1,12 +1,10 @@
-import styled from 'styled-components';
+import { PageWrapper } from "@/style/globalWrapper";
 
-export const HomePageStyle = styled.section`
-`
 const Home = () => {
   return (
-    <HomePageStyle>
+    <PageWrapper>
       <h1>Home</h1>
-    </HomePageStyle>
+    </PageWrapper>
   )
 }
 
