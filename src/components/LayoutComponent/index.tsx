@@ -4,12 +4,12 @@ import { Flex } from "@/style/globalLayout"
 
 interface Props {
  children: ReactNode;
- className: string
+ className?: string
 }
 
-const index = ({ children, className }:Props) => {
+const LayoutComponent = ({ children, className,  }:Props) => {
   return (
-    <Container>
+    <Container className={className}>
        <Flex>
          {children}
        </Flex>
@@ -17,4 +17,4 @@ const index = ({ children, className }:Props) => {
   )
 }
 
-export default index
+export default LayoutComponent
