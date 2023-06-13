@@ -1,10 +1,11 @@
+import { PageWrapper } from '@/style/globalWrapper'
 
 const Search = () => {
-  return (
-    <>
-      <h1>Search</h1>
-    </>
-  )
+    return (
+        <PageWrapper>
+            <h1>Search</h1>
+        </PageWrapper>
+    )
 }
 
 export default Search

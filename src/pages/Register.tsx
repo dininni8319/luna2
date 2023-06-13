@@ -1,10 +1,11 @@
+import { PageWrapper } from '@/style/globalWrapper'
 
 const Register = () => {
-  return (
-    <>
-     <h1>Register</h1> 
-    </>
-  )
+    return (
+        <PageWrapper>
+            <h1>Register</h1>
+        </PageWrapper>
+    )
 }
 
 export default Register
