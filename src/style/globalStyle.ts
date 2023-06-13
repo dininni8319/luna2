@@ -26,7 +26,6 @@ export const Theme = {
     navbarColor: 'white',
     buttonColor: '#E47D31',
     footerColor: '#272D36',
-
     borderColor: '#F2F2F2',
     borderGray: '#EBEBEB',
     textGrey: '#646363',
