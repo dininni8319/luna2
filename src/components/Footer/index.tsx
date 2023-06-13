@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FooterStyle } from './style'
+import { FooterStyle, CopyRightTag } from './style'
 
 const Footer = () => {
   return (
@@ -11,7 +11,9 @@ const Footer = () => {
         <Link to='/ios'>iOS</Link>
         <Link to='/android'>Android</Link>
       </ul>
-      
+      <div>
+        <CopyRightTag>© Copyright Luna 2018</CopyRightTag>
+      </div>
     </FooterStyle>
   )
 }
