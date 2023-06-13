@@ -8,7 +8,7 @@ export const AuthbuttonStyle = styled.div`
     border-radius: ${rem("30px")};
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-   }
+  }
 
   .btn-right {
     margin-left: 1px;
@@ -25,6 +25,11 @@ export const SignUpButton = styled(Button)`
   text-transform: uppercase;
   font-weight: normal;
   font-size: 14px;
+  
+  @media (max-width: 768px) {
+    width: ${rem("60px")};
+    font-size: 12px;
+  }
 ` 
 
 const index = () => {

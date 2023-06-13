@@ -8,13 +8,17 @@ export const NavigationStyle = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  div {
+    padding-left: 0.3rem;
+  }
 `
 
 export const NavLinksUl = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 30%;
+  width: 50%;
   height: 100%;
 
   li:hover {

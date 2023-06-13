@@ -1,53 +1,42 @@
-import { Flex } from '@/style/globalLayout'
 import { Link } from 'react-router-dom'
-import { FooterStyle } from './style'
+import { 
+  FooterStyle, 
+  FooterSectionLinks, 
+  FooterSectionIcons,
+  IconSection,
+  LinksContainer
+} from './style'
 import { Icon } from '@/style/globalIcon'
 import facebook from "@/assets/svg/facebook.svg"
 import twitter from "@/assets/svg/twitter.svg"
 import googleplus from "@/assets/svg/googleplus.svg"
-import youtube from "@/assets/svg/web.svg"
+import instagram from "@/assets/svg/instagram.svg"
+
 
 const Footer = () => {
   return (
     <FooterStyle>
-      <Flex padding="0.6rem 0" width="100%">
-        <Flex 
-          justify="space-between"
-          align="center"
-          width="40%"
-          height="100%"
-          direction="row"
-          padding="0 0.60rem"
-        >
+      <LinksContainer>
+        <FooterSectionLinks>
           <Link to='/about'>About</Link>
           <Link to='/press'>Press</Link>
           <Link to='/blog'>Blog</Link>
           <Link to='/ios'>iOS</Link>
           <Link to='/android'>Android</Link>
-        </Flex>
-        <Flex 
-          width="55%"
-          justify="flex-end"
-          direction="row"
-        >
-          <Flex 
-            width="40%"
-            justify="space-between"
-            direction="row"
-            backgroud='white'
+        </FooterSectionLinks>
+        <FooterSectionIcons>
+          <IconSection
           >
             <Icon src={facebook} />
             <Icon src={twitter} />
             <Icon src={googleplus} />
-            <Icon src={youtube} />
-          </Flex>
-        </Flex>
-      </Flex>
-      <Flex
-        width="100%"
-      >
-        <p>© Copyright Luna 2018</p>
-      </Flex>
+            <Icon src={instagram} />
+          </IconSection>
+        </FooterSectionIcons>
+      </LinksContainer>
+      <p>
+        <span>© Copyright Luna 2018</span>
+      </p>
     </FooterStyle>
     
   )
