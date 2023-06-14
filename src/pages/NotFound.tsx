@@ -8,7 +8,7 @@ const NotFound = () => {
         <PageWrapper>
             <LayoutComponent>
                 <Flex>
-                  <h2>404 The page that you are looking for not exists!</h2>
+                    <h2>404 The page that you are looking for not exists!</h2>
                 </Flex>
             </LayoutComponent>
             <Flex justify="center">

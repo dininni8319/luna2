@@ -10,8 +10,8 @@ export const Flex = styled.div`
 
     @media (min-width: 768px) {
         flex-direction: row;
-        justify-content: ${({ justify }) => (justify ? justify : 'flex-start')};
-        align-items: ${({ align }) => (align ? align : 'flex-star')};
+        justify-content: ${({ justify }) => (justify ? justify : 'center')};
+        align-items: ${({ align }) => (align ? align : 'center')};
     }
 `
 
