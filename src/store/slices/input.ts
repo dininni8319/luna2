@@ -1,11 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store'
 import { IInput } from '@/interfaces'
+import { validate } from '@/utilities/validators'
 
 const initialState: IInput = {
     value: '',
     isTouched: false,
-    isValid: false
+    isValid: false,
+    errorMessage: ''
 }
 
 interface IPayload {
@@ -19,12 +21,16 @@ export const inputSlice = createSlice({
     reducers: {
         onChange: (state: IInput, action: PayloadAction<IPayload>) => {
             state.value = action.payload.val
-            state.isValid = action.payload.validators
+            let valid = validate(action.payload.val, action.payload.validators)
+            state.isValid = valid
+        },
+        touch: (state: IInput) => {
+            state.isTouched = true
         }
     }
 })
 
-export const { onChange } = inputSlice.actions
+export const { onChange, touch } = inputSlice.actions
 
 export const inputValue = (state: RootState) => state.input.value
 export default inputSlice.reducer

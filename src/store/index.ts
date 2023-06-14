@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import inputReducer from './slices/input'
+import emailReducer from './slices/email'
+import formReducer from './slices/form'
 
 const store = configureStore({
     reducer: {
-        input: inputReducer
+        input: inputReducer,
+        email: emailReducer,
+        form: formReducer
     }
 })
 
