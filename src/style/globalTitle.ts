@@ -26,4 +26,4 @@ export const Message = styled.p`
     font-family: 'Roboto', sans-serif;
     font-size: ${rem('14px')};
     font-weight: 400;
-`  
+`

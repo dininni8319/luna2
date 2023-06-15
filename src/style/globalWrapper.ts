@@ -15,7 +15,7 @@ export const Flex = styled.div`
     padding: ${({ padding }) => (padding ? padding : '0')};
     justify-content: ${({ justify }) => (justify ? justify : 'center')};
     align-items: ${({ align }) => (align ? align : 'center')};
-   
+
     @media (min-width: 768px) {
         flex-direction: ${({ smdirection }) =>
             smdirection ? smdirection : 'row'};

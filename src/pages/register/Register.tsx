@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent } from 'react'
 import { PageWrapper, Flex } from '@/style/globalWrapper'
 import { Input } from '@/style/globalInput'
 import { Title } from '@/style/globalTitle'
-import { ErrorMessage, AuthButton } from "./style";
+import { ErrorMessage, AuthButton } from './style'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { onChange, touch } from '@/store/slices/input'
 import { IInput } from '@/interfaces'
@@ -13,8 +13,11 @@ import { Success } from '@/components'
 const Register = () => {
     const dispatch = useAppDispatch()
     const { value, isValid } = useAppSelector((state: IInput) => state.input)
-    const { isSuccess, message } = useAppSelector((state: IInput) => state.email)
-   
+    const { isSuccess, message } = useAppSelector(
+        (state: IInput) => state.email
+    )
+    console.log('🚀 ~ file: Register.tsx:17 ~ Register ~ message---:', message)
+
     const handleEmail = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(
             onChange({
@@ -39,11 +42,11 @@ const Register = () => {
                 <Flex justify="center" padding="2rem 0">
                     <Title>registration</Title>
                 </Flex>
-                <Flex  padding="2rem 0" align='center'>
+                <Flex padding="2rem 0" align="center">
                     {isSuccess ? (
                         <Success />
                     ) : (
-                        <Flex smdirection='column' align='center'> 
+                        <Flex smdirection="column" align="center">
                             <Input
                                 id="email"
                                 value={value}
@@ -51,15 +54,19 @@ const Register = () => {
                                 placeholder="E-mail address"
                                 onBlur={handleTouch}
                             />
-                            {!isSuccess && <ErrorMessage>{message}</ErrorMessage>}
+                            {!isSuccess && (
+                                <ErrorMessage>{message}</ErrorMessage>
+                            )}
                         </Flex>
                     )}
                 </Flex>
 
                 {!isSuccess && (
-                  <Flex justify="center" padding="2rem 0">
-                    <AuthButton desabled={!isValid}>Register</AuthButton>
-                  </Flex>
+                    <Flex justify="center" padding="2rem 0">
+                        <AuthButton disabled={!isValid && !value}>
+                            Register
+                        </AuthButton>
+                    </Flex>
                 )}
             </form>
         </PageWrapper>

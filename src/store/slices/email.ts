@@ -1,7 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store'
 import { IInput } from '@/interfaces'
-import { api } from './api'
+import { api } from '../actions/api'
+import { IEmail, IMessage } from '@/interfaces'
+
+const initialState: IEmail = {
+    isSuccess: false,
+    error: '',
+    message: '',
+    loading: false
+}
 
 export const sendEmail = createAsyncThunk(
     'email/sendEmail',
@@ -10,16 +18,6 @@ export const sendEmail = createAsyncThunk(
         return response.data
     }
 )
-
-interface IEmail {
-    isSuccess: boolean
-    message: string
-}
-
-const initialState: IEmail = {
-    isSuccess: false,
-    message: ''
-}
 
 export const emailSlice = createSlice({
     name: 'email',
@@ -30,13 +28,27 @@ export const emailSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(sendEmail.fulfilled, (state, action) => {
-            state.isSuccess = true
+        builder.addCase(sendEmail.pending, (state: IEmail) => {
+            state.loading = true
         })
-        builder.addCase(sendEmail.rejected, (state, action) => {
-            state.isSuccess = false
-            state.message = 'something went wrong'
-        })
+        builder.addCase(
+            sendEmail.fulfilled,
+            (state: IEmail, action: PayloadAction<IMessage>) => {
+                state.isSuccess = true
+                state.loading = false
+                // state.users = action.payload
+            }
+        )
+        builder.addCase(
+            sendEmail.rejected,
+            (state: IEmail, action: PayloadAction<IMessage>) => {
+                state.isSuccess = false
+                state.loading = false
+                state.message =
+                    action.error.message ||
+                    '. User already exists, try with another email!'
+            }
+        )
     }
 })
 
