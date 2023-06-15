@@ -20,11 +20,11 @@ export const VALIDATOR_MAXLENGTH = (val: string) => ({
     val: val
 })
 
-export const VALIDATOR_MIN = (val: string) => ({
+export const VALIDATOR_MIN = (val: number) => ({
     type: VALIDATOR_TYPE_MIN,
     val: val
 })
-export const VALIDATOR_MAX = (val: string) => ({
+export const VALIDATOR_MAX = (val: number) => ({
     type: VALIDATOR_TYPE_MAX,
     val: val
 })

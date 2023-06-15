@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, useEffect } from 'react'
 import { PageWrapper, Flex } from '@/style/globalWrapper'
 import { Input } from '@/style/globalInput'
 import { Title } from '@/style/globalTitle'
@@ -13,10 +13,15 @@ import { Success } from '@/components'
 const Register = () => {
     const dispatch = useAppDispatch()
     const { value, isValid } = useAppSelector((state: IInput) => state.input)
-    const { isSuccess, message } = useAppSelector(
+    const { isSuccess, message, loading } = useAppSelector(
         (state: IInput) => state.email
     )
-    console.log('🚀 ~ file: Register.tsx:17 ~ Register ~ message---:', message)
+
+    useEffect(() => {
+        if (isSuccess) {
+            let setUserEmail = localStorage.setItem('email', value)
+        }
+    }, [isSuccess])
 
     const handleEmail = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(
@@ -33,7 +38,7 @@ const Register = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        dispatch(sendEmail(value))
+        dispatch(sendEmail(value))``
     }
 
     return (
@@ -49,6 +54,7 @@ const Register = () => {
                         <Flex smdirection="column" align="center">
                             <Input
                                 id="email"
+                                type="email"
                                 value={value}
                                 onChange={handleEmail}
                                 placeholder="E-mail address"
@@ -64,7 +70,7 @@ const Register = () => {
                 {!isSuccess && (
                     <Flex justify="center" padding="2rem 0">
                         <AuthButton disabled={!isValid && !value}>
-                            Register
+                            {loading ? 'Loading...' : 'Register'}
                         </AuthButton>
                     </Flex>
                 )}

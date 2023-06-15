@@ -8,7 +8,10 @@ const initialState: IEmail = {
     isSuccess: false,
     error: '',
     message: '',
-    loading: false
+    loading: false,
+    token: ''
+    // user: {
+    //  }
 }
 
 export const sendEmail = createAsyncThunk(

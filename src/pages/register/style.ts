@@ -5,6 +5,7 @@ import { Button } from '@/style/globalButton'
 
 export const ErrorMessage = styled(Message)`
     color: red;
+    font-size: 12px;
 `
 
 export const AuthButton = styled(Button)`
