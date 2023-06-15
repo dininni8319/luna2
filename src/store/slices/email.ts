@@ -31,9 +31,10 @@ export const emailSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(sendEmail.fulfilled, (state, action) => {
-            state.isSuccess = action.payload
+            state.isSuccess = true
         })
         builder.addCase(sendEmail.rejected, (state, action) => {
+            state.isSuccess = false
             state.message = 'something went wrong'
         })
     }

@@ -1,6 +1,5 @@
 import { ReactNode } from 'react'
-import { Container } from '@/style/globalLayout'
-import { Flex } from '@/style/globalLayout'
+import { Container, Flex } from '@/style/globalWrapper'
 
 interface Props {
     children: ReactNode

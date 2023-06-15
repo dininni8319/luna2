@@ -1,7 +1,6 @@
-import LayoutComponent from '@/components/LayoutComponent/index'
-import { Flex } from '@/style/globalLayout'
 import { Link } from 'react-router-dom'
-import { PageWrapper } from '@/style/globalWrapper'
+import LayoutComponent from '@/components/LayoutComponent'
+import { PageWrapper, Flex } from '@/style/globalWrapper'
 
 const NotFound = () => {
     return (

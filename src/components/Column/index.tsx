@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Container } from '@/style/globalLayout'
+import { Container } from '@/style/globalWrapper'
 
 interface IProps {
     children: ReactNode
