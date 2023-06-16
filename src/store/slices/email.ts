@@ -1,17 +1,13 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store'
-import { IInput } from '@/interfaces'
 import { api } from '../actions/api'
-import { IEmail, IMessage } from '@/interfaces'
+import { IMessage } from '@/interfaces'
 
-const initialState: IEmail = {
+export const initialState = {
     isSuccess: false,
     error: '',
     message: '',
     loading: false,
-    token: ''
-    // user: {
-    //  }
 }
 
 export const sendEmail = createAsyncThunk(
@@ -26,17 +22,17 @@ export const emailSlice = createSlice({
     name: 'email',
     initialState,
     reducers: {
-        emailSent: (state: IInput) => {
-            state.isTouched = true
+        emailSent: (state: typeof initialState) => {
+            state.isSuccess = true
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(sendEmail.pending, (state: IEmail) => {
+        builder.addCase(sendEmail.pending, (state: typeof initialState) => {
             state.loading = true
         })
         builder.addCase(
             sendEmail.fulfilled,
-            (state: IEmail, action: PayloadAction<IMessage>) => {
+            (state: typeof initialState) => {
                 state.isSuccess = true
                 state.loading = false
                 // state.users = action.payload
@@ -44,7 +40,7 @@ export const emailSlice = createSlice({
         )
         builder.addCase(
             sendEmail.rejected,
-            (state: IEmail, action: PayloadAction<IMessage>) => {
+            (state: typeof initialState, action: PayloadAction<IMessage>) => {
                 state.isSuccess = false
                 state.loading = false
                 state.message =

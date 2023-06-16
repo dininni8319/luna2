@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from 'react';
-import { formReducer } from '../reducers/formReducer';
+import { formReducer } from '@/store/reducers/formReducer'
 import { IInput } from '@/interfaces'
 
 export const useForm = (initialInputs: IInput, initialFormValidiy: boolean) => {

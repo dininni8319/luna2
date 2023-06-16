@@ -5,21 +5,20 @@ import { Title } from '@/style/globalTitle'
 import { ErrorMessage, AuthButton } from './style'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { onChange, touch } from '@/store/slices/input'
-import { IInput } from '@/interfaces'
 import { VALIDATOR_EMAIL } from '@/utilities/validators'
 import { sendEmail } from '@/store/slices/email'
 import { Success } from '@/components'
 
 const Register = () => {
     const dispatch = useAppDispatch()
-    const { value, isValid } = useAppSelector((state: IInput) => state.input)
+    const { value, isValid } = useAppSelector((state) => state.input)
     const { isSuccess, message, loading } = useAppSelector(
-        (state: IInput) => state.email
+        (state) => state.email
     )
 
     useEffect(() => {
         if (isSuccess) {
-            let setUserEmail = localStorage.setItem('email', value)
+            localStorage.setItem('email', value)
         }
     }, [isSuccess])
 

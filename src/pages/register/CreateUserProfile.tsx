@@ -3,17 +3,19 @@ import { Title } from '@/style/globalTitle'
 import { PageWrapper, Flex } from '@/style/globalWrapper'
 import { AuthInput } from '@/components'
 import { AuthButton } from '@/pages/register/style'
-import { 
-  VALIDATOR_EMAIL, 
+import {  
   VALIDATOR_MINLENGTH, 
-  VALIDATOR_REQUIRE
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MAXLENGTH
 } from '@/utilities/validators';
+import { useForm } from "@/hooks/form-hook.ts";
+import { userInitialState } from "@/store/reducers/initialStates";
+
+let email = localStorage.getItem('email')
 
 const CreateUserProfile = () => {
-    let getUserEmail = localStorage.getItem('email')
-
+    const [ formState, inputHandler ] = useForm(userInitialState, false)
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {}
-
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
     }
@@ -30,11 +32,12 @@ const CreateUserProfile = () => {
                         <AuthInput
                             id="email"
                             type="email"
-                            value={getUserEmail}
-                            onChange={handleChange}
+                            initialValue={email}
+                            // onChange={handleChange}
                             placeholder="E-Mail address"
                             disabled={true}
                             inputElement="input"
+                            onInput={inputHandler}
                         />
                         <AuthInput
                             id="code"
@@ -43,8 +46,13 @@ const CreateUserProfile = () => {
                             placeholder="Validation code"
                             margin="0.50rem"
                             inputElement="input"
-                            errorText='Code required'
-                            validators={[VALIDATOR_REQUIRE()]}
+                            errorText='Code required and minimum length 8'
+                            onInput={inputHandler}
+                            validators={[
+                                VALIDATOR_REQUIRE(),
+                                VALIDATOR_MINLENGTH(8),
+                                VALIDATOR_MAXLENGTH(8)
+                            ]}
                         />
                     </Flex>
                     <Flex smdirection="row" align="center">
@@ -55,6 +63,7 @@ const CreateUserProfile = () => {
                             placeholder="Username"
                             inputElement="input"
                             errorText='Username required'
+                            onInput={inputHandler}
                             validators={[VALIDATOR_REQUIRE()]}
                         />
                         <AuthInput
@@ -64,6 +73,7 @@ const CreateUserProfile = () => {
                             placeholder="Location"
                             inputElement="input"
                             errorText='Location required'
+                            onInput={inputHandler}
                             validators={[VALIDATOR_REQUIRE()]}
                         />
                     </Flex>
@@ -75,6 +85,7 @@ const CreateUserProfile = () => {
                             placeholder="Password"
                             inputElement="input"
                             errorText='Password required'
+                            onInput={inputHandler}
                             validators={[VALIDATOR_MINLENGTH(8)]}
                         />
                         <AuthInput
@@ -85,6 +96,7 @@ const CreateUserProfile = () => {
                             margin="0.50rem"
                             inputElement="input"
                             errorText='Password repeat required'
+                            onInput={inputHandler}
                             validators={[VALIDATOR_MINLENGTH(8)]}
                         />
                     </Flex>

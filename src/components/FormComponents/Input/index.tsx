@@ -1,7 +1,6 @@
 import { useEffect, useReducer, ChangeEvent } from 'react'
 import { AuthInputStyle } from './InputStyle'
 import { IAuthInput } from '@/interfaces'
-import { ErrorMessage } from '@/pages/register/style'
 import { Flex } from '@/style/globalWrapper'
 import { inputReducer } from '@/store/reducers/inputReducer'
 import { IInput } from '@/interfaces'
@@ -15,8 +14,7 @@ const InputComponent = (props: IAuthInput) => {
         rows, errorText, 
         value, disabled, 
         onInput 
-    } =
-        props
+    } = props
 
     const initialState: IInput = {
         value: props.initialValue || "",
@@ -39,9 +37,11 @@ const InputComponent = (props: IAuthInput) => {
         })
     }
 
-    // useEffect(() => {
-    //    onInput(id, value, isValid);
-    // }, [id, inputState.value, inputState.isValid]);
+    useEffect(() => {
+        if (onInput) {
+            onInput(id, inputState.value, inputState.isValid);
+        }
+    }, [id, inputState.value, inputState.isValid]);
 
     const element =
         inputElement === 'input' ? (

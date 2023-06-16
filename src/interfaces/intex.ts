@@ -6,25 +6,20 @@ export interface IInput {
     errorMessage?: string
 }
 
-export interface IPayload {
-    type: string
-    val: string
-    validators: boolean
-}
-
 export type ValidatorType = {
     type: string
-    val: number
+    val: number 
 }
 
-export interface IEmail {
-    isSuccess: boolean
-    error: string
-    message: string
-    loading: boolean
+export interface IPayload {
+    type?: string
+    val: string
+    validators: ValidatorType
 }
 
-export interface IMessage extends Omit<IEmail, 'isSuccess'> {}
+export interface IMessage extends Omit<IEmail, 'isSuccess'> {
+    error: { message: string }
+}
 
 export interface IAuthInput {
     id: string
@@ -36,7 +31,6 @@ export interface IAuthInput {
     value?: string
     onInput: (id: string, value: string, isValid: boolean) => void
 }
-
 
 export interface ReducerAction {
     type: string
