@@ -1,8 +1,12 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useReducer } from 'react'
 import { formReducer } from '@/store/reducers/formReducer'
 import { IInput } from '@/interfaces'
 
-export const useForm = (initialInputs: IInput, initialFormValidiy: boolean) => {
+type Obj = {
+    [key: string]: { [key: string]: string }
+}
+
+export const useForm = (initialInputs: Obj, initialFormValidiy: boolean) => {
     const [formState, dispatch] = useReducer<
         (state: IInput, action: IInput) => IInput
     >(formReducer, {

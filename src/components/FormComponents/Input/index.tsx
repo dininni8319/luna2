@@ -6,26 +6,30 @@ import { inputReducer } from '@/store/reducers/inputReducer'
 import { IInput } from '@/interfaces'
 
 const InputComponent = (props: IAuthInput) => {
-    const { 
-        id, 
-        type, 
-        placeholder, 
-        inputElement, 
-        rows, errorText, 
-        value, disabled, 
-        onInput 
+    const {
+        id,
+        type,
+        placeholder,
+        inputElement,
+        rows,
+        errorText,
+        value,
+        disabled,
+        onInput
     } = props
 
     const initialState: IInput = {
-        value: props.initialValue || "",
-        isTouched: false, 
-        isValid: props.initialValid || false 
-    };
+        value: props.initialValue || '',
+        isTouched: false,
+        isValid: props.initialValid || false
+    }
 
-    const [ inputState, dispatch ] = useReducer<(state: IInput, action: IInput) => IInput>(inputReducer, initialState);
+    const [inputState, dispatch] = useReducer<
+        (state: IInput, action: IInput) => IInput
+    >(inputReducer, initialState)
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch({
-            type: "ON_CHANGE",
+            type: 'ON_CHANGE',
             validators: props.validators,
             val: event.target.value
         })
@@ -33,20 +37,22 @@ const InputComponent = (props: IAuthInput) => {
 
     const touchHandler = () => {
         dispatch({
-            type: "TOUCH"
+            type: 'TOUCH'
         })
     }
 
     useEffect(() => {
         if (onInput) {
-            onInput(id, inputState.value, inputState.isValid);
+            onInput(id, inputState.value, inputState.isValid)
         }
-    }, [id, inputState.value, inputState.isValid]);
+    }, [id, inputState.value, inputState.isValid])
 
     const element =
         inputElement === 'input' ? (
             <AuthInputStyle
-                formInvalid={!inputState.isValid && inputState.isTouched}
+                forminvalid={(
+                    !inputState.isValid && inputState.isTouched
+                ).toString()}
                 id={id}
                 type={type}
                 placeholder={placeholder}
@@ -68,8 +74,8 @@ const InputComponent = (props: IAuthInput) => {
     return (
         <Flex smdirection="column" align="center">
             {element}
-            {!inputState.isValid && inputState.isTouched && (  
-             <span className='class-error'>{errorText}</span> 
+            {!inputState.isValid && inputState.isTouched && (
+                <span className="class-error">{errorText}</span>
             )}
         </Flex>
     )

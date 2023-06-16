@@ -7,7 +7,7 @@ export const initialState = {
     isSuccess: false,
     error: '',
     message: '',
-    loading: false,
+    loading: false
 }
 
 export const sendEmail = createAsyncThunk(
@@ -30,14 +30,11 @@ export const emailSlice = createSlice({
         builder.addCase(sendEmail.pending, (state: typeof initialState) => {
             state.loading = true
         })
-        builder.addCase(
-            sendEmail.fulfilled,
-            (state: typeof initialState) => {
-                state.isSuccess = true
-                state.loading = false
-                // state.users = action.payload
-            }
-        )
+        builder.addCase(sendEmail.fulfilled, (state: typeof initialState) => {
+            state.isSuccess = true
+            state.loading = false
+            // state.users = action.payload
+        })
         builder.addCase(
             sendEmail.rejected,
             (state: typeof initialState, action: PayloadAction<IMessage>) => {

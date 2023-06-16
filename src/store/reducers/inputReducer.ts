@@ -1,7 +1,10 @@
-import { validate } from '@/utilities/validators';
-import { ReducerAction, IInput} from '@/interfaces'
+import { validate } from '@/utilities/validators'
+import { ReducerAction, IInput } from '@/interfaces'
 
-export const inputReducer = (state: IInput, action: ReducerAction): ReducerAction => {
+export const inputReducer = (
+    state: IInput,
+    action: ReducerAction
+): ReducerAction => {
     switch (action.type) {
         case 'ON_CHANGE':
             return {

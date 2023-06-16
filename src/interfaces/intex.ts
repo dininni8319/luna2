@@ -8,7 +8,7 @@ export interface IInput {
 
 export type ValidatorType = {
     type: string
-    val: number 
+    val: number
 }
 
 export interface IPayload {

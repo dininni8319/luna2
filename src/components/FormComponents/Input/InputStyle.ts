@@ -4,8 +4,11 @@ import { rem } from 'polished'
 
 export const AuthInputStyle = styled(Input)`
     border-bottom: ${rem('1px')} solid
-        ${(props) => (props.formInvalid ? 'red' : 'green')};
-    border: ${({ disabled }) => disabled && "1px solid #ccc" };
+        ${({ forminvalid }: { forminvalid: string }) =>
+            !forminvalid ? 'red' : '#ccc'};
+    border: ${({ disabled }: { disabled: boolean }) =>
+        disabled && '1px solid #ccc'};
     margin-left: 0.4rem;
-    ${({ formInvalid }) => (formInvalid ? 'red' : 'rgba(149,149,149,0.90)')};
+    ${({ forminvalid }: { forminvalid: string }) =>
+        !forminvalid ? 'red' : 'rgba(149,149,149,0.90)'};
 `
