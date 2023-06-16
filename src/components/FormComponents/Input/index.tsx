@@ -1,9 +1,8 @@
 import { useEffect, useReducer, ChangeEvent } from 'react'
 import { AuthInputStyle } from './InputStyle'
-import { IAuthInput } from '@/interfaces'
+import { IAuthInput, ReducerAction } from '@/interfaces/interfaces'
 import { Flex } from '@/style/globalWrapper'
 import { inputReducer } from '@/store/reducers/inputReducer'
-import { IInput } from '@/interfaces'
 
 const InputComponent = (props: IAuthInput) => {
     const {
@@ -18,14 +17,14 @@ const InputComponent = (props: IAuthInput) => {
         onInput
     } = props
 
-    const initialState: IInput = {
+    const initialState = {
         value: props.initialValue || '',
         isTouched: false,
         isValid: props.initialValid || false
     }
 
     const [inputState, dispatch] = useReducer<
-        (state: IInput, action: IInput) => IInput
+        (state: typeof initialState, action: ReducerAction) => any
     >(inputReducer, initialState)
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch({

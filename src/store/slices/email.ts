@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '@/store'
 import { api } from '../actions/api'
-import { IMessage } from '@/interfaces'
 
 export const initialState = {
     isSuccess: false,
@@ -37,7 +36,7 @@ export const emailSlice = createSlice({
         })
         builder.addCase(
             sendEmail.rejected,
-            (state: typeof initialState, action: PayloadAction<IMessage>) => {
+            (state: typeof initialState, action: PayloadAction<any>) => {
                 state.isSuccess = false
                 state.loading = false
                 state.message =

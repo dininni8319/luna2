@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { userInitialState } from '../reducers/initialStates'
+import { ICreateUser, TLogin } from '@/interfaces/interfaces'
 
 export const api = {
     sendUserEmail: async (email: string) => {
@@ -9,11 +9,17 @@ export const api = {
         )
         return response.data
     },
-
-    completeUserRegistration: async (data: typeof userInitialState) => {
+    completeUserRegistration: async (data: ICreateUser) => {
+        const response = await axios.patch(
+            `http://localhost:8000/api/social/user/update`,
+            data 
+        )
+        return response.data
+    },
+    loginUser: async (data: TLogin) => {
         const response = await axios.post(
-            `http://localhost:8000/api/email/verify`,
-            { data }
+            `http://localhost:8000/api/social/signin`,
+            data 
         )
         return response.data
     }

@@ -1,5 +1,5 @@
 import { validate } from '@/utilities/validators'
-import { ReducerAction, IInput } from '@/interfaces'
+import { ReducerAction, IInput } from '@/interfaces/interfaces'
 
 export const inputReducer = (
     state: IInput,

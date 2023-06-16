@@ -1,59 +1,60 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
-// import type { RootState } from '@/store'
 import { api } from '../actions/api'
-import { ICreateUser } from '@/interfaces/interfaces'
+import { TLogin } from '@/interfaces/interfaces'
 
 export const initialState = {
     isSuccess: false,
     error: '',
     message: '',
-    loading: false
+    loading: false, 
+    user: {}
 }
 
-export const completeRegistration = createAsyncThunk(
-    'register/completeRegistration',
-    async (data: ICreateUser) => {
-        const response = await api.completeUserRegistration(data)
+export const signIn = createAsyncThunk(
+    'login/signIn',
+    async (data: TLogin) => {
+        const response = await api.loginUser(data)
         return response.data
     }
 )
 
-export const registerSlice = createSlice({
-    name: 'register',
+export const loginSlice = createSlice({
+    name: 'login',
     initialState,
     reducers: {
-        registerSuccess: (state: typeof initialState) => {
+        loginSuccess: (state: typeof initialState) => {
             state.isSuccess = true
+
         }
     },
     extraReducers: (builder) => {
         builder.addCase(
-            completeRegistration.pending,
+            signIn.pending,
             (state: typeof initialState) => {
                 state.loading = true
             }
         )
         builder.addCase(
-            completeRegistration.fulfilled,
-            (state: typeof initialState) => {
+            signIn.fulfilled,
+            (state: typeof initialState, action: PayloadAction<any>) => {
                 state.isSuccess = true
                 state.loading = false
-                // state.users = action.payload
+                state.user = action.payload
             }
         )
         builder.addCase(
-            completeRegistration.rejected,
+            signIn.rejected,
             (state: typeof initialState, action: PayloadAction<any>) => {
                 state.isSuccess = false
                 state.loading = false
                 state.message =
                     action.error.message ||
-                    '. User already exists, try with another email!'
+                    '. Sorry something went wrong!'
             }
         )
     }
 })
 
-export const { registerSuccess } = registerSlice.actions
+export const { loginSuccess } = loginSlice.actions
 
-export default registerSlice.reducer
+export default loginSlice.reducer

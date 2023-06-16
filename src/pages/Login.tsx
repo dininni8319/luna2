@@ -1,7 +1,77 @@
-import { PageWrapper } from '@/style/globalWrapper'
+import { PageWrapper, Flex } from '@/style/globalWrapper'
+import { FormEvent } from 'react'
+import { Title } from '@/style/globalTitle'
+import { AuthInput } from '@/components'
+import { AuthButton } from '@/pages/register/style'
+import {
+    VALIDATOR_MINLENGTH,
+    VALIDATOR_EMAIL,
+    validate
+} from '@/utilities/validators'
+import { useForm } from '@/hooks/form-hook.ts'
+import { loginInitialState } from '@/store/reducers/initialStates'
+import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
+import { signIn } from '@/store/slices/login'
+import { TLogin } from '@/interfaces/interfaces'
+
+let email = localStorage.getItem('email')
+const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
 
 const Login = () => {
-    return <PageWrapper>Login</PageWrapper>
-}
+    const [formState, inputHandler] = useForm(loginInitialState, false)
+    
+    const dispatch = useAppDispatch()
+    const { isSuccess, message, loading } = useAppSelector(
+        (state) => state.register
+    )
+    const { inputs } = formState
 
+    const formData: TLogin = {
+        email: inputs.email.value,
+        password: inputs.password.value,
+    }
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        dispatch(signIn(formData))
+    }
+
+    return (
+        <PageWrapper>
+            <Flex>
+                <Title>signin</Title>
+            </Flex>
+
+            <form onSubmit={handleSubmit}>
+                <Flex padding="2rem 0" align="center" smdirection="column">
+                        <AuthInput
+                            id="email"
+                            type="email"
+                            initialValue={email || ''}
+                            initialValid={validEmail || false}
+                            placeholder="E-Mail address"
+                            inputElement="input"
+                            onInput={inputHandler}
+                            validators={[VALIDATOR_EMAIL()]}
+                        />
+                        <AuthInput
+                            id="password"
+                            type="password"
+                            placeholder="Password"
+                            inputElement="input"
+                            errorText="Password required"
+                            onInput={inputHandler}
+                            validators={[VALIDATOR_MINLENGTH(8)]}
+                        />
+                </Flex>
+                {message && <span className="class-error">{message}</span>}
+                <Flex justify="center" padding="2rem 0">
+                    <AuthButton disabled={!formState.isValid}>
+                        {loading ? 'Loading...' : 'Login'}
+                    </AuthButton>
+                </Flex>
+            </form>
+        </PageWrapper>
+    )
+}
 export default Login

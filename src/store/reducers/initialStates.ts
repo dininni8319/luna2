@@ -24,3 +24,14 @@ export const userInitialState = {
         isValid: false
     }
 }
+
+export const loginInitialState = {
+    email: {
+        value: '',
+        isValid: false
+    },
+    password: {
+        value: '',
+        isValid: false
+    }
+}

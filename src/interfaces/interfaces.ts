@@ -1,5 +1,4 @@
 export interface IInput {
-    id: string
     value: string
     isTouched?: boolean
     isValid: boolean
@@ -8,7 +7,7 @@ export interface IInput {
 
 export type ValidatorType = {
     type: string
-    val: number
+    val?: number | string
 }
 
 export interface IPayload {
@@ -24,11 +23,16 @@ export interface IMessage extends Omit<IEmail, 'isSuccess'> {
 export interface IAuthInput {
     id: string
     type: string
-    placeHolder: string
+    placeholder: string
     inputElement: string
     rows?: number
     errorText: string
     value?: string
+    disabled: boolean
+    initialValue: string
+    initialValid: boolean
+    margin: string
+    validators: Array<ValidatorType>
     onInput: (id: string, value: string, isValid: boolean) => void
 }
 
@@ -37,3 +41,23 @@ export interface ReducerAction {
     val?: string
     validators?: ValidatorType
 }
+
+export interface ICreateUser {
+    name: string
+    email: string
+    password: string
+    password_repeat: string
+    location: string
+    code: string
+}
+
+interface IRemoveKeys {
+    password_repeat: string
+    location: string
+    code: string
+    name: string
+}
+
+//omit keys using IRemoveKeys
+export type TLogin = Omit<ICreateUser,keyof IRemoveKeys> 
+

@@ -14,31 +14,37 @@ import { useForm } from '@/hooks/form-hook.ts'
 import { userInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { completeRegistration } from '@/store/slices/createUser'
+import { ICreateUser } from '@/interfaces/interfaces'
 
 let email = localStorage.getItem('email')
 const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(userInitialState, false)
-    console.log(
-        '🚀 ~ file: CreateUserProfile.tsx:22 ~ CreateUserProfile ~ formState:',
-        formState
-    )
+
     const dispatch = useAppDispatch()
     const { isSuccess, message, loading } = useAppSelector(
         (state) => state.register
     )
     const { inputs } = formState
 
-    const formData = {
+    const formData: ICreateUser = {
         email: inputs.email.value,
         name: inputs.name.value,
+        code: inputs.code.value,
         location: inputs.location.value,
         password: inputs.password.value,
         password_repeat: inputs.password_repeat.value
     }
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
+        let arePasswordEqual =
+            inputs.password.value.length === inputs.password_repeat.value.length
+        if (!arePasswordEqual) {
+            alert('Passwords are not equal!')
+            return
+        }
         dispatch(completeRegistration(formData))
     }
 
@@ -54,8 +60,8 @@ const CreateUserProfile = () => {
                         <AuthInput
                             id="email"
                             type="email"
-                            initialValue={email}
-                            initialValid={validEmail}
+                            initialValue={email || ''}
+                            initialValid={validEmail || false}
                             placeholder="E-Mail address"
                             disabled={true}
                             inputElement="input"
@@ -121,7 +127,7 @@ const CreateUserProfile = () => {
                 </Flex>
                 {message && <span className="class-error">{message}</span>}
                 <Flex justify="center" padding="2rem 0">
-                    <AuthButton disabled={false}>
+                    <AuthButton disabled={!formState.isValid}>
                         {loading ? 'Loading...' : 'Complete registration'}
                     </AuthButton>
                 </Flex>
