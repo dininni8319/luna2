@@ -1,5 +1,5 @@
-import { useEffect, useState, useReducer } from 'react'
-import { AuthInput } from './InputStyle'
+import { useEffect, useReducer, ChangeEvent } from 'react'
+import { AuthInputStyle } from './InputStyle'
 import { IAuthInput } from '@/interfaces'
 import { ErrorMessage } from '@/pages/register/style'
 import { Flex } from '@/style/globalWrapper'
@@ -7,9 +7,15 @@ import { inputReducer } from '@/store/reducers/inputReducer'
 import { IInput } from '@/interfaces'
 
 const InputComponent = (props: IAuthInput) => {
-    const [ inputId, setInputId ] = useState('')
-
-    const { id, type, placeHolder, inputElement, rows, errorText, value, onInput } =
+    const { 
+        id, 
+        type, 
+        placeholder, 
+        inputElement, 
+        rows, errorText, 
+        value, disabled, 
+        onInput 
+    } =
         props
 
     const initialState: IInput = {
@@ -19,9 +25,7 @@ const InputComponent = (props: IAuthInput) => {
     };
 
     const [ inputState, dispatch ] = useReducer<(state: IInput, action: IInput) => IInput>(inputReducer, initialState);
-
-    let isEqual = id === inputId
-    const changeHandler = (event) => {
+    const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: "ON_CHANGE",
             validators: props.validators,
@@ -30,7 +34,6 @@ const InputComponent = (props: IAuthInput) => {
     }
 
     const touchHandler = () => {
-        setInputId(id)
         dispatch({
             type: "TOUCH"
         })
@@ -42,20 +45,21 @@ const InputComponent = (props: IAuthInput) => {
 
     const element =
         inputElement === 'input' ? (
-            <AuthInput
+            <AuthInputStyle
                 formInvalid={!inputState.isValid && inputState.isTouched}
                 id={id}
                 type={type}
-                placeholder={placeHolder}
+                placeholder={placeholder}
                 onChange={changeHandler}
                 value={value || inputState.value}
                 onBlur={touchHandler}
+                disabled={disabled}
             />
         ) : (
             <textarea
                 id={id}
                 rows={rows || 3}
-                placeholder={placeHolder}
+                placeholder={placeholder}
                 onChange={changeHandler}
                 value={value || value}
                 onBlur={touchHandler}
@@ -64,10 +68,8 @@ const InputComponent = (props: IAuthInput) => {
     return (
         <Flex smdirection="column" align="center">
             {element}
-            {!inputState.isValid && inputState.isTouched && isEqual && (
-                <ErrorMessage>
-                    {errorText || 'something went wrong'}
-                </ErrorMessage>
+            {!inputState.isValid && inputState.isTouched && (  
+             <span className='class-error'>{errorText}</span> 
             )}
         </Flex>
     )

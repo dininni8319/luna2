@@ -11,6 +11,7 @@ import {
 
 const CreateUserProfile = () => {
     let getUserEmail = localStorage.getItem('email')
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {}
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -34,8 +35,6 @@ const CreateUserProfile = () => {
                             placeholder="E-Mail address"
                             disabled={true}
                             inputElement="input"
-                            errorText='Email required'
-                            validators={[VALIDATOR_EMAIL()]}
                         />
                         <AuthInput
                             id="code"
@@ -63,7 +62,6 @@ const CreateUserProfile = () => {
                             type="text"
                             onChange={handleChange}
                             placeholder="Location"
-                            margin="0.50rem"
                             inputElement="input"
                             errorText='Location required'
                             validators={[VALIDATOR_REQUIRE()]}

@@ -10,12 +10,12 @@ const VALIDATOR_TYPE_FILE = 'FILE'
 
 export const VALIDATOR_REQUIRE = () => ({ type: VALIDATOR_TYPE_REQUIRE })
 export const VALIDATOR_FILE = () => ({ type: VALIDATOR_TYPE_FILE })
-export const VALIDATOR_MINLENGTH = (val: string) => ({
+export const VALIDATOR_MINLENGTH = (val: number) => ({
     type: VALIDATOR_TYPE_MINLENGTH,
     val: val
 })
 
-export const VALIDATOR_MAXLENGTH = (val: string) => ({
+export const VALIDATOR_MAXLENGTH = (val: number) => ({
     type: VALIDATOR_TYPE_MAXLENGTH,
     val: val
 })

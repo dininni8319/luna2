@@ -1,7 +1,7 @@
 import { validate } from '@/utilities/validators';
-import { ReducerAction, IInput } from '@/interfaces'
+import { ReducerAction, IInput} from '@/interfaces'
 
-export const inputReducer = (state: IInput, action: ReducerAction): any => {
+export const inputReducer = (state: IInput, action: ReducerAction): ReducerAction => {
     switch (action.type) {
         case 'ON_CHANGE':
             return {
@@ -13,11 +13,6 @@ export const inputReducer = (state: IInput, action: ReducerAction): any => {
             return {
                 ...state,
                 isTouched: true
-            }
-        case 'EMAIL_SEND_SUCCESS':
-            return {
-                ...state,
-                isSuccess: true
             }
         default:
             return state

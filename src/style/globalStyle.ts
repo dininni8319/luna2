@@ -20,6 +20,14 @@ export const globalStyle = createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  .class-error {
+    font-size: xx-small;
+    font-weight: 300;
+    color: red;
+    margin-top: 0;
+    padding: 0 0 5px 0;
+  }
 `
 
 export const Theme = {
