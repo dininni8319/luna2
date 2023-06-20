@@ -7,11 +7,11 @@ const Navigation = () => {
     return (
         <NavigationStyle>
             <div>
-                <Link to="/">LUNA</Link>
+                <Link to="/home">LUNA</Link>
             </div>
             <NavLinksUl>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/home">Home</Link>
                 </li>
                 <li>
                     <Link to="/search">Search</Link>

@@ -10,9 +10,9 @@ export const api = {
         return response.data
     },
     completeUserRegistration: async (data: ICreateUser) => {
-        const response = await axios.patch(
-            `http://localhost:8000/api/social/user/update`,
-            data 
+        const response = await axios.post(
+            `http://localhost:8000/api/social/signup`,
+            data
         )
         return response.data
     },
@@ -21,6 +21,6 @@ export const api = {
             `http://localhost:8000/api/social/signin`,
             data 
         )
-        return response.data
+        return response
     }
 }

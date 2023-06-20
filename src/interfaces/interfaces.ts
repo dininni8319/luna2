@@ -26,12 +26,12 @@ export interface IAuthInput {
     placeholder: string
     inputElement: string
     rows?: number
-    errorText: string
+    errorText?: string
     value?: string
-    disabled: boolean
-    initialValue: string
-    initialValid: boolean
-    margin: string
+    disabled?: boolean
+    initialValue?: string
+    initialValid?: boolean
+    margin?: string
     validators: Array<ValidatorType>
     onInput: (id: string, value: string, isValid: boolean) => void
 }

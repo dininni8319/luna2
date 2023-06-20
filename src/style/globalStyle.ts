@@ -24,6 +24,7 @@ export const globalStyle = createGlobalStyle`
   .class-error {
     font-size: xx-small;
     font-weight: 300;
+    /* text-align: center; */
     color: red;
     margin-top: 0;
     padding: 0 0 5px 0;

@@ -15,17 +15,19 @@ import { userInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { completeRegistration } from '@/store/slices/createUser'
 import { ICreateUser } from '@/interfaces/interfaces'
+import { useNavigate } from 'react-router-dom'
 
 let email = localStorage.getItem('email')
 const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(userInitialState, false)
-
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { isSuccess, message, loading } = useAppSelector(
         (state) => state.register
     )
+    console.log("🚀 ~ file: CreateUserProfile.tsx:28 ~ CreateUserProfile ~ isSuccess:", isSuccess)
     const { inputs } = formState
 
     const formData: ICreateUser = {
@@ -46,6 +48,9 @@ const CreateUserProfile = () => {
             return
         }
         dispatch(completeRegistration(formData))
+        if (isSuccess) {
+            navigate('/login')
+        }
     }
 
     return (

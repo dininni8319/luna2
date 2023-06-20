@@ -11,7 +11,7 @@ const NotFound = () => {
                 </Flex>
             </LayoutComponent>
             <Flex justify="center">
-                <Link to="/">Continue</Link>
+                <Link to="/home">Continue</Link>
             </Flex>
         </PageWrapper>
     )

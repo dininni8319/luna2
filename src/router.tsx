@@ -14,6 +14,7 @@ import {
     CreateProfile
 } from '@/pages/index'
 import Layout from '@/layout'
+import Protected from './utilities/protected'
 
 const router = createBrowserRouter([{ path: '*', Component: Root }])
 
@@ -24,16 +25,29 @@ const Router = () => {
 export default Router
 
 function Root() {
+   
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/create/profile/" element={<CreateProfile />} />
+                <Route path="/create/profile/:slug" element={<CreateProfile />} />
                 <Route path="*" element={<NotFound />} />
+                <Route path="/home" element={
+                    <Protected>
+                        <Home />
+                    </Protected>
+                } />
+                <Route path="/search" element={
+                    <Protected>
+                        <Search />
+                    </Protected>
+                } />
+                <Route path="/profile" element={
+                    <Protected>
+                        <Profile />
+                    </Protected>
+                }/>
             </Route>
         </Routes>
     )

@@ -1,5 +1,5 @@
+import { FormEvent, useEffect } from 'react'
 import { PageWrapper, Flex } from '@/style/globalWrapper'
-import { FormEvent } from 'react'
 import { Title } from '@/style/globalTitle'
 import { AuthInput } from '@/components'
 import { AuthButton } from '@/pages/register/style'
@@ -13,27 +13,36 @@ import { loginInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { signIn } from '@/store/slices/login'
 import { TLogin } from '@/interfaces/interfaces'
+import { useNavigate } from "react-router-dom";
 
 let email = localStorage.getItem('email')
 const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
 
 const Login = () => {
     const [formState, inputHandler] = useForm(loginInitialState, false)
-    
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const { isSuccess, message, loading } = useAppSelector(
-        (state) => state.register
-    )
+    const { isSuccess, message, loading, user } = useAppSelector(
+        (state) => state.login
+        )
+
     const { inputs } = formState
 
     const formData: TLogin = {
         email: inputs.email.value,
         password: inputs.password.value,
     }
-
+    
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        dispatch(signIn(formData))
+        dispatch(signIn(formData)) 
+        let userData = JSON.stringify(user)
+
+        if (isSuccess) {
+            localStorage.setItem('user', userData)
+            localStorage.removeItem('email')
+            navigate('/home')
+        }  
     }
 
     return (
