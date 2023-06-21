@@ -3,13 +3,15 @@ import inputReducer from './slices/input'
 import emailReducer from './slices/email'
 import registerReducer from './slices/createUser'
 import loginReducer from './slices/login'
+import restaurantReducer from './slices/restaurant'
 
 const store = configureStore({
     reducer: {
         input: inputReducer,
         email: emailReducer,
         register: registerReducer,
-        login: loginReducer
+        login: loginReducer,
+        restaurant: restaurantReducer
     }
 })
 

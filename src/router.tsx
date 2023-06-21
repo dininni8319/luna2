@@ -12,7 +12,8 @@ import {
     Profile,
     NotFound,
     CreateProfile,
-    CreateNewRestaurant
+    CreateNewRestaurant,
+    Restaurants
 } from '@/pages/index'
 import Layout from '@/layout'
 import Protected from './utilities/protected'
@@ -78,6 +79,14 @@ function Root() {
                         element={
                             <Protected>
                                 <CreateNewRestaurant />
+                            </Protected>
+                        }
+                    />
+                    <Route
+                        path="/restaurants"
+                        element={
+                            <Protected>
+                                <Restaurants />
                             </Protected>
                         }
                     />

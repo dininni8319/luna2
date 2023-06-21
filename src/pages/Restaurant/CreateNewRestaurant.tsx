@@ -8,6 +8,7 @@ import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
 import { AuthInput, Select } from '@/components'
 import { categoriesOption, priceLevel } from '@/components/FormComponents/Select/options'
 import { AuthButton } from '@/pages/register/style'
+import { createRestaurant } from '@/store/slices/restaurant'
 import { restaurantInitialState, prices } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import {
@@ -15,7 +16,7 @@ import {
     NewRestaurantContainer,
     InformationContainer
 } from './style'
-
+import { IRestaurant } from '@/interfaces/interfaces'
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(restaurantInitialState, false)
@@ -25,12 +26,13 @@ const CreateUserProfile = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    
     const { isSuccess, message, loading } = useAppSelector(
-        (state) => state.register
-    )
+        (state) => state.restaurant
+        )
     const { inputs } = formState
-
-    const formData = {
+    
+    const formData: IRestaurant = {
         email: inputs.email.value,
         name: inputs.name.value,
         city: inputs.city.value,
@@ -48,7 +50,7 @@ const CreateUserProfile = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        // dispatch(completeRegistration(formData))
+        dispatch(createRestaurant(formData))
         if (isSuccess) {
             navigate('/restaurant')
         }

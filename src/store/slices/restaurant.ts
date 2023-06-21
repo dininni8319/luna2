@@ -10,6 +10,10 @@ export const initialState = {
     loading: false
 }
 
+interface IPayload {
+    message: string
+}
+
 export const createRestaurant = createAsyncThunk(
     'restaurant/createRestaurant',
     async (data: IRestaurant) => {
@@ -32,19 +36,22 @@ export const restaurantSlice = createSlice({
         )
         builder.addCase(
             createRestaurant.fulfilled,
-            (state: typeof initialState) => {
+            (state: typeof initialState, action: PayloadAction<IPayload>) => {
                 state.isSuccess = true
                 state.loading = false
-                // state.users = action.payload
+                state.message = action.payload.message
             }
         )
         builder.addCase(
             createRestaurant.rejected,
-            (state: typeof initialState, action: PayloadAction<any>) => {
+            (
+                state: typeof initialState,
+                action: PayloadAction<any>
+            ) => {
                 state.isSuccess = false
                 state.loading = false
                 state.message =
-                    action.error.message || '. Something went wrong!'
+                    action.payload.error.message || '. Something went wrong!'
             }
         )
     }
