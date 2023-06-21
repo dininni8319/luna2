@@ -6,7 +6,7 @@ export const useFetch = (
     endpoint: string,
     { verb = 'get', params = {} } = {}
 ) => {
-    const [data, setData] = useState({})
+    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
 

@@ -1,5 +1,8 @@
 import { PageWrapper } from '@/style/globalWrapper'
 import { useFetch } from '@/hooks/http-hook'
+import { TileGrid } from '@/style/tile'
+import Card from '@/components/Card'
+import { IRestaurant } from '@/interfaces/interfaces'
 
 const Restaurants = () => {
 
@@ -7,7 +10,9 @@ const Restaurants = () => {
 
     return (
         <PageWrapper>
-            {JSON.stringify(payload)}
+            <TileGrid>
+                {payload?.map((restaurant: IRestaurant) => <Card restaurant={restaurant} />)}
+            </TileGrid>
         </PageWrapper>
     )
 }
