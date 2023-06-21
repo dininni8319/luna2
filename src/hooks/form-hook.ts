@@ -1,14 +1,24 @@
 import { useCallback, useReducer } from 'react'
 import { formReducer } from '@/store/reducers/formReducer'
-import { IInput } from '@/interfaces'
 
-type Obj = {
-    [key: string]: { [key: string]: string }
+type TInitialValue = {
+    [key: string]: {
+        value: string
+        isValid: boolean
+        isTouched: boolean
+    }
 }
 
-export const useForm = (initialInputs: Obj, initialFormValidiy: boolean) => {
+interface IForm {
+    inputs: TInitialValue
+    isValid: boolean
+}
+export const useForm = (
+    initialInputs: TInitialValue,
+    initialFormValidiy: boolean
+) => {
     const [formState, dispatch] = useReducer<
-        (state: IInput, action: IInput) => IInput
+        (state: IForm, action: any) => any
     >(formReducer, {
         inputs: initialInputs,
         isValid: initialFormValidiy

@@ -73,7 +73,7 @@ const InputComponent = (props: IAuthInput) => {
             />
         )
     return (
-        <Flex smdirection="column" align="center">
+        <Flex smdirection="column" align="start">
             {element}
             {!inputState.isValid && inputState.isTouched && (
                 <span className="class-error">{errorText}</span>

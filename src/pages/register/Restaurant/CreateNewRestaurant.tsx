@@ -1,23 +1,30 @@
 import { FormEvent } from 'react'
-import { Title } from '@/style/globalTitle'
-import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
-import { AuthInput } from '@/components'
-import { AuthButton } from '@/pages/register/style'
-import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/utilities/validators'
-import { useForm } from '@/hooks/form-hook.ts'
-import { userInitialState } from '@/store/reducers/initialStates'
-import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
-import { completeRegistration } from '@/store/slices/createUser'
-import { ICreateUser } from '@/interfaces/interfaces'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from '@/hooks/form-hook'
+import { useFetch } from '@/hooks/http-hook'
+import { Title } from '@/style/globalTitle'
+import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/utilities/validators'
+import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
+import { AuthInput, Select } from '@/components'
+import { AuthButton } from '@/pages/register/style'
+import { restaurantInitialState } from '@/store/reducers/initialStates'
+import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import {
     FieldTitle,
     NewRestaurantContainer,
     InformationContainer
 } from './style'
 
+interface IPayload {
+    name: string
+}
+
 const CreateUserProfile = () => {
-    const [formState, inputHandler] = useForm(userInitialState, false)
+    const [formState, inputHandler] = useForm(restaurantInitialState, false)
+    const {
+        payload: { categories }
+    } = useFetch('http://localhost:8000/api/restaurant/categories')
+
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { isSuccess, message, loading } = useAppSelector(
@@ -25,26 +32,42 @@ const CreateUserProfile = () => {
     )
     const { inputs } = formState
 
-    const formData: ICreateUser = {
+    const formData = {
         email: inputs.email.value,
         name: inputs.name.value,
-        code: inputs.code.value,
-        location: inputs.location.value,
-        password: inputs.password.value,
-        password_repeat: inputs.password_repeat.value
+        city: inputs.city.value,
+        country: inputs.country.value,
+        category: inputs.category.value,
+        zipcode: inputs.zipcode.value,
+        phone: inputs.phone.value,
+        street: inputs.street.value,
+        opening_hours: inputs.opening_hours.value,
+        price_level: inputs.price_level.value,
+        image: inputs.image.value,
+        website: inputs.website.value
+    }
+
+    const categoriesOption = () => {
+        return (
+            <>
+                <option value="" disabled>
+                    Please select
+                </option>
+                {categories?.map((category: IPayload) => {
+                    return (
+                        <option value={category.name}>{category.name}</option>
+                    )
+                })}
+            </>
+        )
     }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        let arePasswordEqual =
-            inputs.password.value.length === inputs.password_repeat.value.length
-        if (!arePasswordEqual) {
-            alert('Passwords are not equal!')
-            return
-        }
-        dispatch(completeRegistration(formData))
+
+        // dispatch(completeRegistration(formData))
         if (isSuccess) {
-            navigate('/login')
+            navigate('/restaurant')
         }
     }
 
@@ -61,20 +84,21 @@ const CreateUserProfile = () => {
                             id="name"
                             type="text"
                             inputElement="input"
+                            errorText="Name is required"
                             onInput={inputHandler}
                             validators={[VALIDATOR_REQUIRE()]}
                         />
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Category*</FieldTitle>
-                        <AuthInput
+                        <Select
                             id="category"
-                            type="text"
-                            inputElement="input"
-                            errorText="Category required"
                             onInput={inputHandler}
                             validators={[VALIDATOR_REQUIRE()]}
-                        />
+                            errorText="Category is required"
+                        >
+                            {categoriesOption()}
+                        </Select>
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Country*</FieldTitle>
@@ -82,7 +106,7 @@ const CreateUserProfile = () => {
                             id="country"
                             type="text"
                             inputElement="input"
-                            errorText="Country required"
+                            errorText="Country is required"
                             onInput={inputHandler}
                             validators={[VALIDATOR_REQUIRE()]}
                         />
@@ -117,7 +141,6 @@ const CreateUserProfile = () => {
                             id="zipcode"
                             type="text"
                             inputElement="input"
-                            errorText="Zipcode required"
                             onInput={inputHandler}
                         />
                     </FieldWrapper>
@@ -147,9 +170,7 @@ const CreateUserProfile = () => {
                             id="email"
                             type="email"
                             inputElement="input"
-                            errorText="Email required"
                             onInput={inputHandler}
-                            validators={[VALIDATOR_MINLENGTH(8)]}
                         />
                     </FieldWrapper>
                     <FieldWrapper>

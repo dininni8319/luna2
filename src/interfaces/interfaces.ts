@@ -1,3 +1,12 @@
+export type Methods =
+    | 'head'
+    | 'options'
+    | 'put'
+    | 'post'
+    | 'patch'
+    | 'delete'
+    | 'get'
+
 export interface IInput {
     value: string
     isTouched?: boolean
@@ -13,7 +22,7 @@ export type ValidatorType = {
 export interface IPayload {
     type?: string
     val: string
-    validators: ValidatorType
+    validators?: ValidatorType
 }
 
 export interface IMessage extends Omit<IEmail, 'isSuccess'> {
@@ -32,14 +41,14 @@ export interface IAuthInput {
     initialValue?: string
     initialValid?: boolean
     margin?: string
-    validators?: Array<ValidatorType>
+    validators?: ValidatorType[]
     onInput: (id: string, value: string, isValid: boolean) => void
 }
 
 export interface ReducerAction {
     type: string
     val?: string
-    validators?: ValidatorType
+    validators?: ValidatorType[]
 }
 
 export interface ICreateUser {
