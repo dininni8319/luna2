@@ -6,8 +6,9 @@ import { Title } from '@/style/globalTitle'
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/utilities/validators'
 import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
 import { AuthInput, Select } from '@/components'
+import { categoriesOption, priceLevel } from '@/components/FormComponents/Select/options'
 import { AuthButton } from '@/pages/register/style'
-import { restaurantInitialState } from '@/store/reducers/initialStates'
+import { restaurantInitialState, prices } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import {
     FieldTitle,
@@ -15,9 +16,6 @@ import {
     InformationContainer
 } from './style'
 
-interface IPayload {
-    name: string
-}
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(restaurantInitialState, false)
@@ -45,21 +43,6 @@ const CreateUserProfile = () => {
         price_level: inputs.price_level.value,
         image: inputs.image.value,
         website: inputs.website.value
-    }
-
-    const categoriesOption = () => {
-        return (
-            <>
-                <option value="" disabled>
-                    Please select
-                </option>
-                {categories?.map((category: IPayload) => {
-                    return (
-                        <option value={category.name}>{category.name}</option>
-                    )
-                })}
-            </>
-        )
     }
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -94,10 +77,10 @@ const CreateUserProfile = () => {
                         <Select
                             id="category"
                             onInput={inputHandler}
-                            validators={[VALIDATOR_REQUIRE()]}
+                            // validators={[VALIDATOR_REQUIRE()]}
                             errorText="Category is required"
                         >
-                            {categoriesOption()}
+                            {categoriesOption(categories)}
                         </Select>
                     </FieldWrapper>
                     <FieldWrapper>
@@ -176,7 +159,7 @@ const CreateUserProfile = () => {
                     <FieldWrapper>
                         <FieldTitle>Opening Hours</FieldTitle>
                         <AuthInput
-                            id="opening"
+                            id="opening_hours"
                             type="text"
                             placeholder="Opening Hours"
                             inputElement="input"
@@ -185,13 +168,13 @@ const CreateUserProfile = () => {
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Price Level</FieldTitle>
-                        <AuthInput
+                        <Select
                             id="price_level"
-                            type="text"
-                            placeholder="Price Level"
-                            inputElement="input"
                             onInput={inputHandler}
-                        />
+                        >
+                            {priceLevel()}
+                        </Select>
+                      
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Image</FieldTitle>
@@ -205,7 +188,7 @@ const CreateUserProfile = () => {
                 </InformationContainer>
                 {message && <span className="class-error">{message}</span>}
                 <Flex justify="center" padding="2rem 0">
-                    <AuthButton disabled={!formState.isValid}>
+                    <AuthButton>
                         {loading ? 'Loading...' : 'Create a new Restaurant'}
                     </AuthButton>
                 </Flex>

@@ -27,10 +27,11 @@ const InputComponent = (props: IAuthInput) => {
     const [inputState, dispatch] = useReducer<
         (state: typeof initialState, action: ReducerAction) => any
     >(inputReducer, initialState)
+
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: 'ON_CHANGE',
-            validators: props.validators,
+            validators: props.validators || [],
             val: event.target.value
         })
     }

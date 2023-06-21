@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ICreateUser, TLogin } from '@/interfaces/interfaces'
+import { ICreateUser, TLogin, IRestaurant } from '@/interfaces/interfaces'
 
 export const api = {
     sendUserEmail: async (email: string) => {
@@ -19,6 +19,13 @@ export const api = {
     loginUser: async (data: TLogin) => {
         const response = await axios.post(
             `http://localhost:8000/api/social/signin`,
+            data
+        )
+        return response
+    },
+    createRestaurantAction: async (data: IRestaurant) => {
+        const response = await axios.post(
+            `http://localhost:8000/api/restaurant/create`,
             data
         )
         return response

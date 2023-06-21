@@ -41,7 +41,6 @@ export const restaurantInitialState = {
     },
     category: {
         value: '',
-        isValid: false,
         isTouched: false
     },
     city: {
@@ -60,19 +59,23 @@ export const restaurantInitialState = {
         isTouched: false
     },
     zipcode: {
-        value: ''
+        value: '',
+        isValid: true
     },
     price_level: {
-        value: ''
+        value: '',
     },
     website: {
-        value: ''
+        value: '',
+        isValid: true
     },
     opening_hours: {
-        value: ''
+        value: '',
+        isValid: true
     },
     image: {
-        value: ''
+        value: '',
+        isValid: true
     }
 }
 export const loginInitialState = {
@@ -85,3 +88,11 @@ export const loginInitialState = {
         isValid: false
     }
 }
+
+    
+export const prices = [
+    { name: '$' },
+    { name: '$$' },
+    { name: '$$$' },
+    { name: '$$$$' }
+]

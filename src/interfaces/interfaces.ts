@@ -69,3 +69,18 @@ interface IRemoveKeys {
 
 //omit keys using IRemoveKeys
 export type TLogin = Omit<ICreateUser, keyof IRemoveKeys>
+
+export interface IRestaurant {
+    name: string
+    email: string
+    city: string
+    country: string
+    category: string
+    zipcode: string
+    phone: string
+    street: string
+    opening_hours: string
+    price_level: string
+    image: string
+    website: string
+}
