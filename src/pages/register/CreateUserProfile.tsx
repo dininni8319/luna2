@@ -27,7 +27,6 @@ const CreateUserProfile = () => {
     const { isSuccess, message, loading } = useAppSelector(
         (state) => state.register
     )
-    console.log("🚀 ~ file: CreateUserProfile.tsx:28 ~ CreateUserProfile ~ isSuccess:", isSuccess)
     const { inputs } = formState
 
     const formData: ICreateUser = {
@@ -102,6 +101,7 @@ const CreateUserProfile = () => {
                             id="location"
                             type="text"
                             placeholder="Location"
+                            margin="0.50rem"
                             inputElement="input"
                             errorText="Location required"
                             onInput={inputHandler}

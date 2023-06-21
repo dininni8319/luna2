@@ -23,7 +23,7 @@ export interface IMessage extends Omit<IEmail, 'isSuccess'> {
 export interface IAuthInput {
     id: string
     type: string
-    placeholder: string
+    placeholder?: string
     inputElement: string
     rows?: number
     errorText?: string
@@ -32,7 +32,7 @@ export interface IAuthInput {
     initialValue?: string
     initialValid?: boolean
     margin?: string
-    validators: Array<ValidatorType>
+    validators?: Array<ValidatorType>
     onInput: (id: string, value: string, isValid: boolean) => void
 }
 
@@ -59,5 +59,4 @@ interface IRemoveKeys {
 }
 
 //omit keys using IRemoveKeys
-export type TLogin = Omit<ICreateUser,keyof IRemoveKeys> 
-
+export type TLogin = Omit<ICreateUser, keyof IRemoveKeys>

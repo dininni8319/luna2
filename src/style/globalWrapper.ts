@@ -29,3 +29,9 @@ export const Container = styled.div`
     justify-content: center;
     padding-top: 5rem;
 `
+
+export const FieldWrapper = styled.label`
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+`

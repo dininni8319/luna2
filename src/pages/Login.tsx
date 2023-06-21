@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from 'react'
+import { FormEvent, useContext } from 'react'
 import { PageWrapper, Flex } from '@/style/globalWrapper'
 import { Title } from '@/style/globalTitle'
 import { AuthInput } from '@/components'
@@ -13,7 +13,8 @@ import { loginInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { signIn } from '@/store/slices/login'
 import { TLogin } from '@/interfaces/interfaces'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '@/context/auth-context'
 
 let email = localStorage.getItem('email')
 const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
@@ -22,27 +23,28 @@ const Login = () => {
     const [formState, inputHandler] = useForm(loginInitialState, false)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const { login } = useContext(AuthContext)
     const { isSuccess, message, loading, user } = useAppSelector(
         (state) => state.login
-        )
+    )
 
     const { inputs } = formState
 
     const formData: TLogin = {
         email: inputs.email.value,
-        password: inputs.password.value,
+        password: inputs.password.value
     }
-    
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        dispatch(signIn(formData)) 
-        let userData = JSON.stringify(user)
-
+        dispatch(signIn(formData))
+        let expirationDate: any
         if (isSuccess) {
-            localStorage.setItem('user', userData)
+            login(user.token, user.email, user.name, expirationDate)
             localStorage.removeItem('email')
+
             navigate('/home')
-        }  
+        }
     }
 
     return (
@@ -53,25 +55,25 @@ const Login = () => {
 
             <form onSubmit={handleSubmit}>
                 <Flex padding="2rem 0" align="center" smdirection="column">
-                        <AuthInput
-                            id="email"
-                            type="email"
-                            initialValue={email || ''}
-                            initialValid={validEmail || false}
-                            placeholder="E-Mail address"
-                            inputElement="input"
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_EMAIL()]}
-                        />
-                        <AuthInput
-                            id="password"
-                            type="password"
-                            placeholder="Password"
-                            inputElement="input"
-                            errorText="Password required"
-                            onInput={inputHandler}
-                            validators={[VALIDATOR_MINLENGTH(8)]}
-                        />
+                    <AuthInput
+                        id="email"
+                        type="email"
+                        initialValue={email || ''}
+                        initialValid={validEmail || false}
+                        placeholder="E-Mail address"
+                        inputElement="input"
+                        onInput={inputHandler}
+                        validators={[VALIDATOR_EMAIL()]}
+                    />
+                    <AuthInput
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        inputElement="input"
+                        errorText="Password required"
+                        onInput={inputHandler}
+                        validators={[VALIDATOR_MINLENGTH(8)]}
+                    />
                 </Flex>
                 {message && <span className="class-error">{message}</span>}
                 <Flex justify="center" padding="2rem 0">

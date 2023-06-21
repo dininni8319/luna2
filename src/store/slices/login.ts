@@ -14,36 +14,28 @@ export const initialState = {
     isSuccess: false,
     error: '',
     message: '',
-    loading: false, 
+    loading: false,
     user: {
         name: '',
         email: '',
-        token: ''   
+        token: ''
     }
 }
 
-export const signIn = createAsyncThunk(
-    'login/signIn',
-    async (data: TLogin) => {
-        const response = await api.loginUser(data)
+export const signIn = createAsyncThunk('login/signIn', async (data: TLogin) => {
+    const response = await api.loginUser(data)
 
-        return response.data
-    }
-)
+    return response.data
+})
 
 export const loginSlice = createSlice({
     name: 'login',
     initialState,
-    reducers: {
-
-    },
+    reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(
-            signIn.pending,
-            (state: typeof initialState) => {
-                state.loading = true
-            }
-        )
+        builder.addCase(signIn.pending, (state: typeof initialState) => {
+            state.loading = true
+        })
         builder.addCase(
             signIn.fulfilled,
             (state: typeof initialState, action: PayloadAction<TPayload>) => {

@@ -14,7 +14,8 @@ const InputComponent = (props: IAuthInput) => {
         errorText,
         value,
         disabled,
-        onInput
+        onInput,
+        margin
     } = props
 
     const initialState = {
@@ -59,6 +60,7 @@ const InputComponent = (props: IAuthInput) => {
                 value={value || inputState.value}
                 onBlur={touchHandler}
                 disabled={disabled}
+                margin={margin}
             />
         ) : (
             <textarea

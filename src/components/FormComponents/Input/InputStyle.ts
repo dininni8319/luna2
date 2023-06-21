@@ -8,7 +8,7 @@ export const AuthInputStyle = styled(Input)`
             !forminvalid ? 'red' : '#ccc'};
     border: ${({ disabled }: { disabled: boolean }) =>
         disabled && '1px solid #ccc'};
-    margin-left: 0.4rem;
-    ${({ forminvalid }: { forminvalid: string }) =>
+    margin-left: ${({ margin }) => (margin ? margin : 0)};
+    color: ${({ forminvalid }: { forminvalid: string }) =>
         !forminvalid ? 'red' : 'rgba(149,149,149,0.90)'};
 `
