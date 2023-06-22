@@ -13,7 +13,6 @@ import {
     NotFound,
     CreateProfile,
     CreateNewRestaurant,
-    Restaurants
 } from '@/pages/index'
 import Layout from '@/layout'
 import Protected from './utilities/protected'
@@ -82,14 +81,14 @@ function Root() {
                             </Protected>
                         }
                     />
-                    <Route
+                    {/* <Route
                         path="/restaurants"
                         element={
                             <Protected>
                                 <Restaurants />
                             </Protected>
                         }
-                    />
+                    /> */}
                 </Route>
             </Routes>
         </AuthContext.Provider>

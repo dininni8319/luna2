@@ -40,7 +40,9 @@ export const SearchTitle = styled.h1`
         top: 55%;
         left: 0%;
         border-bottom: 2px solid
-            ${({ theme: { buttonColor }, id, uid }) =>
-                id === uid ? buttonColor : '#ccc'};
+            ${({ theme: { buttonColor }, id, uid, initialStyle, isClicked }) =>
+                id === uid || !!initialStyle && !isClicked
+                    ? buttonColor
+                    : '#ccc'};
     }
 `

@@ -18,7 +18,7 @@ export const titleSlice = createSlice({
             action: PayloadAction<IPayload>
         ) => {
             state.id = action.payload.id
-            state.isClicked = !state.isClicked
+            state.isClicked = true
         },
     }
 })
