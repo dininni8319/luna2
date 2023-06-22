@@ -12,7 +12,7 @@ export const AuthButton = styled(Button)`
     color: white;
     background: ${({ disabled }) => (disabled ? '#ccc' : 'inerit')};
     width: ${rem('200px')};
-    height: ${rem('35px')};
+    min-height: ${rem('40px')};
     text-transform: uppercase;
     font-weight: normal;
     font-size: 14px;

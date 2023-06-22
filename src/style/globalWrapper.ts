@@ -15,6 +15,7 @@ export const Flex = styled.div`
     padding: ${({ padding }) => (padding ? padding : '0')};
     justify-content: ${({ justify }) => (justify ? justify : 'center')};
     align-items: ${({ align }) => (align ? align : 'center')};
+    border-bottom: 2px solid ${({ color }) => color ? color : 'trasparent'};
 
     @media (min-width: 768px) {
         flex-direction: ${({ smdirection }) =>

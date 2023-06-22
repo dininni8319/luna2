@@ -6,6 +6,11 @@ export const TileGrid = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: ${rem('50px')} ${rem('30px')};
     padding: ${rem('30px')} 0;
+    justify-items: center;
+    
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const TileContainer = styled.div`

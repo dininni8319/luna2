@@ -5,11 +5,11 @@ import { useFetch } from '@/hooks/http-hook'
 import { Title } from '@/style/globalTitle'
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/utilities/validators'
 import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
-import { AuthInput, Select } from '@/components'
+import { AuthInput, Select, ImageInput } from '@/components'
 import { categoriesOption, priceLevel } from '@/components/FormComponents/Select/options'
 import { AuthButton } from '@/pages/register/style'
 import { createRestaurant } from '@/store/slices/restaurant'
-import { restaurantInitialState, prices } from '@/store/reducers/initialStates'
+import { restaurantInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import {
     FieldTitle,
@@ -17,12 +17,13 @@ import {
     InformationContainer
 } from './style'
 import { IRestaurant } from '@/interfaces/interfaces'
+import { base_url } from '@/utilities/urls'
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(restaurantInitialState, false)
     const {
         payload: { categories }
-    } = useFetch('http://localhost:8000/api/restaurant/categories')
+    } = useFetch(`${base_url}/restaurant/categories`)
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -180,18 +181,19 @@ const CreateUserProfile = () => {
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Image</FieldTitle>
-                        <AuthInput
+                        <ImageInput
                             id="image"
-                            type="image"
+                            type="file"
                             inputElement="input"
                             onInput={inputHandler}
+                            placeholder='Choose a file'
                         />
                     </FieldWrapper>
                 </InformationContainer>
                 {message && <span className="class-error">{message}</span>}
                 <Flex justify="center" padding="2rem 0">
                     <AuthButton>
-                        {loading ? 'Loading...' : 'Create a new Restaurant'}
+                        {loading ? 'Loading...' : 'Create a Restaurant'}
                     </AuthButton>
                 </Flex>
             </NewRestaurantContainer>

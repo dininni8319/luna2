@@ -10,7 +10,7 @@ import {
     VALIDATOR_EMAIL,
     validate
 } from '@/utilities/validators'
-import { useForm } from '@/hooks/form-hook.ts'
+import { useForm } from '@/hooks/form-hook'
 import { userInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { completeRegistration } from '@/store/slices/createUser'

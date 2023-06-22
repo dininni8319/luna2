@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { rem } from 'polished'
 
 export const Selector = styled.select`
-    width: 340px;
-    height: 45px;
+    width: ${rem('310px')};
+    height: ${rem('45px')};
     border: 1px solid #ebebeb;
     background-color: white;
     padding: 0 10px;

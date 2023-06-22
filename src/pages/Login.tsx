@@ -8,7 +8,7 @@ import {
     VALIDATOR_EMAIL,
     validate
 } from '@/utilities/validators'
-import { useForm } from '@/hooks/form-hook.ts'
+import { useForm } from '@/hooks/form-hook'
 import { loginInitialState } from '@/store/reducers/initialStates'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { signIn } from '@/store/slices/login'
@@ -42,7 +42,6 @@ const Login = () => {
         if (isSuccess) {
             login(user.token, user.email, user.name, expirationDate)
             localStorage.removeItem('email')
-
             navigate('/home')
         }
     }

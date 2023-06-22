@@ -5,7 +5,7 @@ type TInitialValue = {
     [key: string]: {
         value: string
         isValid: boolean
-        isTouched: boolean
+        isTouched?: boolean
     }
 }
 
