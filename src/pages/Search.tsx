@@ -12,8 +12,6 @@ import { TitleUserHeader } from '@/components'
 const Search = () => {
     const dispatch = useAppDispatch()
     const { isClicked, id } = useAppSelector(state => state.title)
-    console.log("🚀 ~ file: Search.tsx:15 ~ Search ~ id:", id)
-    console.log(convertPath(id));
     
     const { payload } = useFetch(`${base_url}${id?convertPath(id):"/restaurant/list"}`)
 

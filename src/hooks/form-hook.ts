@@ -3,7 +3,7 @@ import { formReducer } from '@/store/reducers/formReducer'
 
 type TInitialValue = {
     [key: string]: {
-        value: string
+        value: string | File
         isValid: boolean
         isTouched?: boolean
     }
@@ -25,7 +25,7 @@ export const useForm = (
     })
 
     const inputHandler = useCallback(
-        (id: string, value: string, isValid?: boolean) => {
+        (id: string, value: string | File, isValid?: boolean) => {
             dispatch({
                 type: 'INPUT_CHANGE',
                 inputId: id,

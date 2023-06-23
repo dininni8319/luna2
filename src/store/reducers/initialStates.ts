@@ -32,7 +32,9 @@ export const restaurantInitialState = {
         isTouched: false
     },
     email: {
-        value: ''
+        value: '',
+        isValid: true,
+        isTouched: false
     },
     phone: {
         value: '',
@@ -41,6 +43,7 @@ export const restaurantInitialState = {
     },
     category: {
         value: '',
+        isValid: false,
         isTouched: false
     },
     city: {
@@ -60,22 +63,28 @@ export const restaurantInitialState = {
     },
     zipcode: {
         value: '',
-        isValid: true
+        isValid: true,
+        isTouched: false
     },
     price_level: {
         value: '',
+        isValid: true,
+        isTouched: false
     },
     website: {
         value: '',
-        isValid: true
+        isValid: true,
+        isTouched: false
     },
     opening_hours: {
         value: '',
-        isValid: true
+        isValid: true,
+        isTouched: false
     },
     image: {
-        value: '',
-        isValid: true
+        value: null,
+        isValid: true,
+        isTouched: false
     }
 }
 export const loginInitialState = {

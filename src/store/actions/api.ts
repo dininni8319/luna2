@@ -4,10 +4,9 @@ import { base_url } from '@/utilities/urls'
 
 export const api = {
     sendUserEmail: async (email: string) => {
-        const response = await axios.post(
-            `${base_url}/email/verify`,
-            { email: email }
-        )
+        const response = await axios.post(`${base_url}/email/verify`, {
+            email: email
+        })
         return response.data
     },
     completeUserRegistration: async (data: ICreateUser) => {
@@ -18,8 +17,8 @@ export const api = {
         const response = await axios.post(`${base_url}/user/signin`, data)
         return response
     },
-    createRestaurantAction: async (data: IRestaurant) => {
-        const response = await axios.post(`${base_url}/restaurant/new`, data)
+    createRestaurantAction: async (data: FormData, config: any) => {
+        const response = await axios.post(`${base_url}/restaurant/new`, data, config)
         return response
     }
 }

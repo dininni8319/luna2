@@ -42,7 +42,7 @@ export interface IAuthInput {
     initialValid?: boolean
     margin?: string
     validators?: ValidatorType[]
-    onInput: (id: string, value: string, isValid: boolean) => void
+    onInput: (id: string, value: string | File, isValid: boolean) => void
 }
 
 export interface ReducerAction {
@@ -81,6 +81,6 @@ export interface IRestaurant {
     street: string
     opening_hours: string
     price_level: string
-    image: string
+    image: File 
     website: string
 }

@@ -16,7 +16,8 @@ import {
     NewRestaurantContainer,
     InformationContainer
 } from './style'
-import { IRestaurant } from '@/interfaces/interfaces'
+// import { formatData } from "./formData";
+
 import { base_url } from '@/utilities/urls'
 
 const CreateUserProfile = () => {
@@ -24,34 +25,38 @@ const CreateUserProfile = () => {
     const {
         payload: { categories }
     } = useFetch(`${base_url}/restaurant/categories`)
-
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    
+
     const { isSuccess, message, loading } = useAppSelector(
         (state) => state.restaurant
         )
     const { inputs } = formState
     
-    const formData: IRestaurant = {
-        email: inputs.email.value,
-        name: inputs.name.value,
-        city: inputs.city.value,
-        country: inputs.country.value,
-        category: inputs.category.value,
-        zipcode: inputs.zipcode.value,
-        phone: inputs.phone.value,
-        street: inputs.street.value,
-        opening_hours: inputs.opening_hours.value,
-        price_level: inputs.price_level.value,
-        image: inputs.image.value,
-        website: inputs.website.value
-    }
+    // const formData = formatData(inputs)
 
+    const formData: FormData = new FormData()
+
+    formData.append('email', inputs.email.value)
+    formData.append('name', inputs.name.value)
+    formData.append('city', inputs.city.value)
+    formData.append('country', inputs.country.value)
+    formData.append('category', inputs.email.value)
+    formData.append('zipcode', inputs.zipcode.value)
+    formData.append('phone', inputs.phone.value)
+    formData.append('street', inputs.street.value)
+    formData.append('opening_hours', inputs.opening_hours.value)
+    formData.append('price_level', inputs.price_level.value)
+    formData.append('image', inputs.image.value)
+    formData.append('website', inputs.website.value)
+    
+    const config = {
+            headers: { 'content-type': 'multipart/form-data' }
+    }
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        dispatch(createRestaurant(formData))
+        dispatch(createRestaurant(formData, config))
         if (isSuccess) {
             navigate('/restaurant')
         }

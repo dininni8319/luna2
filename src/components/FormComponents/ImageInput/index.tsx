@@ -1,27 +1,8 @@
-import { useEffect, useReducer, ChangeEvent } from 'react'
-import { AuthInputStyle } from '../Input/InputStyle'
+import { useState, useRef, useEffect, useReducer, ChangeEvent } from 'react'
+import { ImageInputStyle, Label }  from './style'
 import { IAuthInput, ReducerAction } from '@/interfaces/interfaces'
 import { Flex } from '@/style/globalWrapper'
 import { inputReducer } from '@/store/reducers/inputReducer'
-import styled from 'styled-components';
-import { rem } from 'polished'
-
-export const ImageInputStyle = styled(AuthInputStyle)`
-    display: none;
-`;
-
-export const Label = styled.label`
-    background-color: ${({theme}) => theme.buttonColor};
-    color: white;
-    width: ${rem('200px')};
-    height: ${rem('30px')};
-    text-transform: uppercase;
-    font-weight: normal;
-    font-size: 14px;
-    border-radius: ${rem('30px')};
-    text-align: center;
-    padding-top: ${rem('10px')};
-`;
 
 const ImageInput = (props: IAuthInput) => {
     const {
@@ -30,7 +11,32 @@ const ImageInput = (props: IAuthInput) => {
         placeholder,
         onInput,
     } = props
+    const [ file, setFile ] = useState<File | null>(null)
+    const [ isValid, setIsValid ] = useState(false)
 
+    const filePickerRef = useRef<HTMLInputElement>(null)
+
+
+    const pickHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        let pickedFile 
+        let fileIsValid = isValid
+        
+        if (event.target.files && event.target.files.length === 1) {
+            pickedFile = event.target.files[0]
+               if (pickedFile !== null) {
+                   setFile(pickedFile)
+                   setIsValid(true)
+                   fileIsValid = true            
+            
+               }
+    
+        } else {
+            setIsValid(false)
+            fileIsValid = false            
+        }
+        
+        pickedFile && onInput(id, pickedFile, fileIsValid) 
+    }
     const initialState = {
         value: props.initialValue || '',
         isTouched: false,
@@ -40,20 +46,6 @@ const ImageInput = (props: IAuthInput) => {
     const [inputState, dispatch] = useReducer<
         (state: typeof initialState, action: ReducerAction) => any
     >(inputReducer, initialState)
-
-    const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch({
-            type: 'ON_CHANGE',
-            validators: [],
-            val: event.target.value
-        })
-    }
-
-    const touchHandler = () => {
-        dispatch({
-            type: 'TOUCH'
-        })
-    }
 
     useEffect(() => {
         if (onInput) {
@@ -65,18 +57,17 @@ const ImageInput = (props: IAuthInput) => {
         <Flex smdirection="column" align="start">
              <Label htmlFor={id}
              >   
-               Choose a file...
+              {file ? `${file.name.slice(0,16)}...`  : 'Choose a file...'}
              </Label>
              <ImageInputStyle
+                ref={filePickerRef}
                 forminvalid={(
-                    !inputState.isValid && inputState.isTouched
+                    !isValid 
                 ).toString()}
                 id={id}
                 type={type}
                 placeholder={placeholder}
-                onChange={changeHandler}
-                value={inputState.value}
-                onBlur={touchHandler}
+                onChange={pickHandler}
             />
         </Flex>
     )
