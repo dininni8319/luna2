@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { TileContainer, TileTopLine } from '@/style/tile';
 // import { RatingStars } from '../../../style/stars';
 import { Link } from 'react-router-dom';
-
+import { file_url } from '@/utilities/urls'
 
 const RestaurantDetailsContainer = styled.div`
   color: black;
@@ -48,9 +48,10 @@ const LinkWrapper = styled(Link)`
 
 // TODO: get percentage and number of votes from restaurant data
 const Card = ({ restaurant }: any) => {
-
-  const { _id, name, street, city } = restaurant;
-
+  
+  const { _id, name, street, city, image } = restaurant;
+  const str = file_url + image
+  console.log("🚀 ~ file: index.tsx:53 ~ Card ~ image:", str)
   return (
     <TileContainer>
       <TileTopLine />
@@ -70,7 +71,8 @@ const Card = ({ restaurant }: any) => {
             <NumberOfVotes>{5}</NumberOfVotes>
           </RatingContainer>
         </RestaurantDetailsContainer>
-        <ImageContainer image="https://picsum.photos/200"></ImageContainer>
+        <ImageContainer image={str}></ImageContainer>
+        {/* <img src={str} alt="" /> */}
       </LinkWrapper>
     </TileContainer>
   )

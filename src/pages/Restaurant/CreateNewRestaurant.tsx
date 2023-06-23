@@ -58,7 +58,7 @@ const CreateUserProfile = () => {
 
         dispatch(createRestaurant(formData, config))
         if (isSuccess) {
-            navigate('/restaurant')
+            navigate('/search')
         }
     }
 
@@ -198,7 +198,8 @@ const CreateUserProfile = () => {
                 {message && <span className="class-error">{message}</span>}
                 <Flex justify="center" padding="2rem 0">
                     <AuthButton>
-                        {loading ? 'Loading...' : 'Create a Restaurant'}
+                        {/* {loading ? 'Loading...' : 'Create a Restaurant'} */}
+                        { 'Create a Restaurant'}
                     </AuthButton>
                 </Flex>
             </NewRestaurantContainer>

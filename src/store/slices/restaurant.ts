@@ -14,6 +14,7 @@ interface IPayload {
     message: string
 }
 
+
 export const createRestaurant = createAsyncThunk(
     'restaurant/createRestaurant',
     async (data: FormData, config: any) => {
