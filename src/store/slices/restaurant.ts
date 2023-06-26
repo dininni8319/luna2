@@ -17,8 +17,8 @@ interface IPayload {
 
 export const createRestaurant = createAsyncThunk(
     'restaurant/createRestaurant',
-    async (data: FormData, config: any) => {
-        const response = await api.createRestaurantAction(data, config)
+    async (data: FormData) => {
+        const response = await api.createRestaurantAction(data)
         return response.data
     }
 )

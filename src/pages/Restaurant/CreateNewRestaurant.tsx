@@ -19,6 +19,7 @@ import {
 // import { formatData } from "./formData";
 
 import { base_url } from '@/utilities/urls'
+import { useAuth } from '@/hooks/auth-hook'
 
 const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(restaurantInitialState, false)
@@ -27,8 +28,9 @@ const CreateUserProfile = () => {
     } = useFetch(`${base_url}/restaurant/categories`)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const { token } = useAuth()
 
-    const { isSuccess, message, loading } = useAppSelector(
+    const { isSuccess, message } = useAppSelector(
         (state) => state.restaurant
         )
     const { inputs } = formState
@@ -50,13 +52,17 @@ const CreateUserProfile = () => {
     formData.append('image', inputs.image.value)
     formData.append('website', inputs.website.value)
     
-    const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-    }
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        dispatch(createRestaurant(formData, config))
+        try {
+            dispatch(createRestaurant(formData))
+        } catch (err) {
+            console.log('====================================');
+            console.log(err);
+            console.log('====================================');
+            return
+        }
         if (isSuccess) {
             navigate('/search')
         }

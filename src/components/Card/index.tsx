@@ -50,8 +50,7 @@ const LinkWrapper = styled(Link)`
 const Card = ({ restaurant }: any) => {
   
   const { _id, name, street, city, image } = restaurant;
-  const str = file_url + image
-  console.log("🚀 ~ file: index.tsx:53 ~ Card ~ image:", str)
+  
   return (
     <TileContainer>
       <TileTopLine />
@@ -71,7 +70,7 @@ const Card = ({ restaurant }: any) => {
             <NumberOfVotes>{5}</NumberOfVotes>
           </RatingContainer>
         </RestaurantDetailsContainer>
-        <ImageContainer image={str}></ImageContainer>
+        <ImageContainer image={image}></ImageContainer>
         {/* <img src={str} alt="" /> */}
       </LinkWrapper>
     </TileContainer>

@@ -24,10 +24,9 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { login } = useContext(AuthContext)
-    const { isSuccess, message, loading, user } = useAppSelector(
+    const { message, loading, user } = useAppSelector(
         (state) => state.login
-    )
-
+        )
     const { inputs } = formState
 
     const formData: TLogin = {
@@ -37,13 +36,16 @@ const Login = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        dispatch(signIn(formData))
         let expirationDate: any
-        if (isSuccess) {
-            login(user.token, user.email, user.name, expirationDate)
-            localStorage.removeItem('email')
-            navigate('/home')
+        try {
+            dispatch(signIn(formData))
+        } catch (err) {
+          console.log(err, 'error')
+          return
         }
+        login(user.token, user.email, user.name, expirationDate)
+        localStorage.removeItem('email')
+        navigate('/home')
     }
 
     return (
