@@ -12,7 +12,7 @@ import {
     Profile,
     NotFound,
     CreateProfile,
-    CreateNewRestaurant,
+    CreateNewRestaurant
 } from '@/pages/index'
 import Layout from '@/layout'
 import Protected from './utilities/protected'

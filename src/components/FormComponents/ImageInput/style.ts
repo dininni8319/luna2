@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 import { rem } from 'polished'
 import { AuthInputStyle } from '../Input/InputStyle'
 

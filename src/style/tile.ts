@@ -7,14 +7,14 @@ export const TileGrid = styled.div`
     gap: ${rem('50px')} ${rem('30px')};
     padding: ${rem('30px')} 0;
     justify-items: center;
-    
+
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
 `
 
 export const TileContainer = styled.div`
-    width: ${rem("280px")};
+    width: ${rem('280px')};
     border: 1px solid #ebebeb;
     background-color: white;
     border-radius: 3px;

@@ -6,7 +6,10 @@ import { Title } from '@/style/globalTitle'
 import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '@/utilities/validators'
 import { PageWrapper, Flex, FieldWrapper } from '@/style/globalWrapper'
 import { AuthInput, Select, ImageInput } from '@/components'
-import { categoriesOption, priceLevel } from '@/components/FormComponents/Select/options'
+import {
+    categoriesOption,
+    priceLevel
+} from '@/components/FormComponents/Select/options'
 import { AuthButton } from '@/pages/register/style'
 import { createRestaurant } from '@/store/slices/restaurant'
 import { restaurantInitialState } from '@/store/reducers/initialStates'
@@ -25,16 +28,14 @@ const CreateUserProfile = () => {
     const [formState, inputHandler] = useForm(restaurantInitialState, false)
     const {
         payload: { categories }
-    } = useFetch(`${base_url}/restaurant/categories`)
+    } = useFetch(`${base_url}/restaurant/categories`, 'get', {}, {})
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { token } = useAuth()
 
-    const { isSuccess, message } = useAppSelector(
-        (state) => state.restaurant
-        )
+    const { isSuccess, message } = useAppSelector((state) => state.restaurant)
     const { inputs } = formState
-    
+
     // const formData = formatData(inputs)
 
     const formData: FormData = new FormData()
@@ -51,16 +52,16 @@ const CreateUserProfile = () => {
     formData.append('price_level', inputs.price_level.value)
     formData.append('image', inputs.image.value)
     formData.append('website', inputs.website.value)
-    
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
         try {
             dispatch(createRestaurant(formData))
         } catch (err) {
-            console.log('====================================');
-            console.log(err);
-            console.log('====================================');
+            console.log('====================================')
+            console.log(err)
+            console.log('====================================')
             return
         }
         if (isSuccess) {
@@ -182,13 +183,9 @@ const CreateUserProfile = () => {
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Price Level</FieldTitle>
-                        <Select
-                            id="price_level"
-                            onInput={inputHandler}
-                        >
+                        <Select id="price_level" onInput={inputHandler}>
                             {priceLevel()}
                         </Select>
-                      
                     </FieldWrapper>
                     <FieldWrapper>
                         <FieldTitle>Image</FieldTitle>
@@ -197,7 +194,7 @@ const CreateUserProfile = () => {
                             type="file"
                             inputElement="input"
                             onInput={inputHandler}
-                            placeholder='Choose a file'
+                            placeholder="Choose a file"
                         />
                     </FieldWrapper>
                 </InformationContainer>
@@ -205,7 +202,7 @@ const CreateUserProfile = () => {
                 <Flex justify="center" padding="2rem 0">
                     <AuthButton>
                         {/* {loading ? 'Loading...' : 'Create a Restaurant'} */}
-                        { 'Create a Restaurant'}
+                        {'Create a Restaurant'}
                     </AuthButton>
                 </Flex>
             </NewRestaurantContainer>

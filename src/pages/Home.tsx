@@ -1,6 +1,5 @@
 import { PageWrapper } from '@/style/globalWrapper'
 
-
 const Home = () => {
     return (
         <PageWrapper>

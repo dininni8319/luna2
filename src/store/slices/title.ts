@@ -6,7 +6,7 @@ interface IPayload {
 
 const initialState = {
     id: '',
-    isClicked: false,
+    isClicked: false
 }
 
 export const titleSlice = createSlice({
@@ -19,7 +19,7 @@ export const titleSlice = createSlice({
         ) => {
             state.id = action.payload.id
             state.isClicked = true
-        },
+        }
     }
 })
 

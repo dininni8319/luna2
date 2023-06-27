@@ -41,7 +41,7 @@ export const SearchTitle = styled.h1`
         left: 0%;
         border-bottom: 2px solid
             ${({ theme: { buttonColor }, id, uid, initialStyle, isClicked }) =>
-                id === uid || !!initialStyle && !isClicked
+                id === uid || (!!initialStyle && !isClicked)
                     ? buttonColor
                     : '#ccc'};
     }

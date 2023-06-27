@@ -19,11 +19,11 @@ interface IProps {
 
 const Select = (props: IProps) => {
     const { validators, onInput, id, errorText, children } = props
-    
+
     const [inputState, dispatch] = useReducer<
-    (state: typeof initialState, action: ReducerAction) => any
+        (state: typeof initialState, action: ReducerAction) => any
     >(inputReducer, initialState)
-    
+
     const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch({
             type: 'ON_CHANGE',
@@ -39,7 +39,7 @@ const Select = (props: IProps) => {
     }
 
     useEffect(() => {
-       onInput(id, inputState.value, initialState.isValid)
+        onInput(id, inputState.value, initialState.isValid)
     }, [id, inputState.value, initialState.isValid])
 
     return (

@@ -11,25 +11,30 @@ import { TitleUserHeader } from '@/components'
 
 const Search = () => {
     const dispatch = useAppDispatch()
-    const { isClicked, id } = useAppSelector(state => state.title)
-    
-    const { payload } = useFetch(`${base_url}${id?convertPath(id):"/restaurant/list"}`)
+    const { isClicked, id } = useAppSelector((state) => state.title)
+
+    const { payload } = useFetch(
+        `${base_url}${id ? convertPath(id) : '/restaurant/list'}`,
+        'get',
+    )
 
     const renderView = () => {
         if (id === 'restaurants' || id === '') {
-           return payload?.map((restaurant: IRestaurant) => <Card restaurant={restaurant} />)
+            return payload?.map((restaurant: IRestaurant) => (
+                <Card restaurant={restaurant} />
+            ))
         } else if (id === 'users') {
-          return payload?.map((user: IRestaurant) => <TitleUserHeader user={user}/>)
+            return payload?.map((user: IRestaurant) => (
+                <TitleUserHeader user={user} />
+            ))
         } else if (id === 'reviews') {
             return <h3>No review was found!</h3>
-        } 
+        }
     }
     return (
         <PageWrapper>
             <SearchNavigation />
-            <TileGrid>  
-                 {renderView()}
-            </TileGrid>
+            <TileGrid>{renderView()}</TileGrid>
         </PageWrapper>
     )
 }

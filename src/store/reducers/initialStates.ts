@@ -98,7 +98,6 @@ export const loginInitialState = {
     }
 }
 
-    
 export const prices = [
     { name: '$' },
     { name: '$$' },

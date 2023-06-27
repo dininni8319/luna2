@@ -24,9 +24,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { login } = useContext(AuthContext)
-    const { message, loading, user } = useAppSelector(
-        (state) => state.login
-        )
+    const { message, loading, user } = useAppSelector((state) => state.login)
     const { inputs } = formState
 
     const formData: TLogin = {
@@ -40,8 +38,8 @@ const Login = () => {
         try {
             dispatch(signIn(formData))
         } catch (err) {
-          console.log(err, 'error')
-          return
+            console.log(err, 'error')
+            return
         }
         login(user.token, user.email, user.name, expirationDate)
         localStorage.removeItem('email')

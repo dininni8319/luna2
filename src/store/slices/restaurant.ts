@@ -14,7 +14,6 @@ interface IPayload {
     message: string
 }
 
-
 export const createRestaurant = createAsyncThunk(
     'restaurant/createRestaurant',
     async (data: FormData) => {
@@ -26,8 +25,7 @@ export const createRestaurant = createAsyncThunk(
 export const restaurantSlice = createSlice({
     name: 'restaurant',
     initialState,
-    reducers: {
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder.addCase(
             createRestaurant.pending,
@@ -45,10 +43,7 @@ export const restaurantSlice = createSlice({
         )
         builder.addCase(
             createRestaurant.rejected,
-            (
-                state: typeof initialState,
-                action: PayloadAction<any>
-            ) => {
+            (state: typeof initialState, action: PayloadAction<any>) => {
                 state.isSuccess = false
                 state.loading = false
                 state.message =

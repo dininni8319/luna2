@@ -13,6 +13,6 @@
 //   formData.append('price_level', inputs.price_level.value)
 //   formData.append('image', inputs.image.value)
 //   formData.append('website', inputs.website.value)
-  
+
 //   return formData
 // }

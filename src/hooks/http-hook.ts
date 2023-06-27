@@ -4,14 +4,15 @@ import axios from 'axios'
 
 export const useFetch = (
     endpoint: string,
-    { verb = 'get', params = {} } = {}
+    verb = 'get', 
+    body = {},
 ) => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-
+    
     useEffect(() => {
-        axios[verb as Methods](endpoint, params)
+        axios[verb as Methods](endpoint, body)
             .then((response) => {
                 setData(response.data)
             })

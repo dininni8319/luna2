@@ -81,6 +81,6 @@ export interface IRestaurant {
     street: string
     opening_hours: string
     price_level: string
-    image: File 
+    image: File
     website: string
 }
