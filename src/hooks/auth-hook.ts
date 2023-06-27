@@ -38,7 +38,7 @@ export const useAuth = () => {
     }, [])
 
     useEffect(() => {
-        let user = localStorage.getItem('user')
+        const user = localStorage.getItem('user')
         if (user) {
             const storedData = JSON.parse(user) // the parse method converts the json object/text back into JS
 

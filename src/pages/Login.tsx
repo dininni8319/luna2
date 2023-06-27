@@ -16,7 +16,7 @@ import { TLogin } from '@/interfaces/interfaces'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '@/context/auth-context'
 
-let email = localStorage.getItem('email')
+const email = localStorage.getItem('email')
 const validEmail = email && validate(email, [VALIDATOR_EMAIL()])
 
 const Login = () => {
@@ -34,16 +34,18 @@ const Login = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        let expirationDate: any
+        
         try {
             dispatch(signIn(formData))
         } catch (err) {
             console.log(err, 'error')
             return
         }
-        login(user.token, user.email, user.name, expirationDate)
-        localStorage.removeItem('email')
-        navigate('/home')
+        if (user && user.token) {
+            login(user.token, user.email, user.name)
+            localStorage.removeItem('email')
+            navigate('/home')
+        }
     }
 
     return (

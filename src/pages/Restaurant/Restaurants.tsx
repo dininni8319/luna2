@@ -7,18 +7,14 @@ import { base_url } from '@/utilities/urls'
 import { SearchNavigation } from '@/components'
 import { useAuth } from '@/hooks/auth-hook'
 
+
 const Restaurants = () => {
     const { token } = useAuth()
     const { payload } = useFetch(`${base_url}/restaurant`, 'get',{
         headers: {
             Authorization: `Bearer ${token}`,
         }
-    })
-    function calcalateDaysBetweenDates() {
-        let date1 = new Date('2021-06-30') //
-    }
-
-     
+    }) 
 
     return (
         <PageWrapper>

@@ -19,7 +19,6 @@ import {
     NewRestaurantContainer,
     InformationContainer
 } from './style'
-// import { formatData } from "./formData";
 
 import { base_url } from '@/utilities/urls'
 import { useAuth } from '@/hooks/auth-hook'
@@ -35,8 +34,6 @@ const CreateUserProfile = () => {
 
     const { isSuccess, message } = useAppSelector((state) => state.restaurant)
     const { inputs } = formState
-
-    // const formData = formatData(inputs)
 
     const formData: FormData = new FormData()
 
@@ -59,9 +56,7 @@ const CreateUserProfile = () => {
         try {
             dispatch(createRestaurant(formData))
         } catch (err) {
-            console.log('====================================')
             console.log(err)
-            console.log('====================================')
             return
         }
         if (isSuccess) {

@@ -4,6 +4,8 @@ export const AuthContext = createContext({
     isLoggedIn: false,
     token: '',
     name: '',
-    login: (token: string, email: string, name: string, expData: Date) => {},
-    logout: (token: string, email: string, name: string, expData: Date) => {}
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    login: (token: string, email: string, name: string) => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    logout: (token: string, email: string, name: string) => {}
 })
