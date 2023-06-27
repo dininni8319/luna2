@@ -25,6 +25,7 @@ const Login = () => {
     const dispatch = useAppDispatch()
     const { login } = useContext(AuthContext)
     const { message, loading, user } = useAppSelector((state) => state.login)
+    console.log("🚀 ~ file: Login.tsx:28 ~ Login ~ user:", user)
     const { inputs } = formState
 
     const formData: TLogin = {
@@ -41,7 +42,7 @@ const Login = () => {
             console.log(err, 'error')
             return
         }
-        if (user && user.token) {
+        if (user.token) {
             login(user.token, user.email, user.name)
             localStorage.removeItem('email')
             navigate('/home')

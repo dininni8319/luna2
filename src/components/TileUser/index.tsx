@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { TileContainer, TileTopLine } from '@/style/tile'
@@ -39,7 +38,7 @@ const UserHeaderReviewTotal = styled.p`
     font-size: 16px;
 `
 
-const UserDescription = styled(Message)`
+export const UserDescription = styled(Message)`
     padding: 10px 5px;
 `
 

@@ -10,7 +10,7 @@ export const PageWrapper = styled.section`
 export const Flex = styled.div`
     display: flex;
     flex-direction: ${({ direction }) => (direction ? direction : 'column')};
-    width: ${({ width }) => (width ? width : 'auto')};
+    width: 100%;
     height: ${({ height }) => (height ? height : 'auto')};
     padding: ${({ padding }) => (padding ? padding : '0')};
     justify-content: ${({ justify }) => (justify ? justify : 'center')};
@@ -18,6 +18,7 @@ export const Flex = styled.div`
     border-bottom: 2px solid ${({ color }) => (color ? color : 'trasparent')};
 
     @media (min-width: 768px) {
+        width: ${({ width }) => (width ? width : 'auto')};
         flex-direction: ${({ smdirection }) =>
             smdirection ? smdirection : 'row'};
         justify-content: ${({ justify }) => (justify ? justify : 'center')};

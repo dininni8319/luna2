@@ -8,10 +8,11 @@ import { SearchNavigation } from '@/components'
 import { useAppDispatch, useAppSelector } from '@/hooks/dispatch-selector-hooks'
 import { convertPath } from '@/utilities/util'
 import { TitleUserHeader } from '@/components'
+import { useHttpClient } from '@/hooks/useHttp'
 
 const Search = () => {
     const dispatch = useAppDispatch()
-    const { isClicked, id } = useAppSelector((state) => state.title)
+    const { id } = useAppSelector((state) => state.title)
 
     const { payload } = useFetch(
         `${base_url}${id ? convertPath(id) : '/restaurant/list'}`,

@@ -14,7 +14,7 @@ export const TileGrid = styled.div`
 `
 
 export const TileContainer = styled.div`
-    width: ${rem('280px')};
+    width: ${({ width }) => width ? rem(width) :rem('280px')} ;
     border: 1px solid #ebebeb;
     background-color: white;
     border-radius: 3px;
@@ -22,6 +22,10 @@ export const TileContainer = styled.div`
     flex-direction: column;
     border-radius: 3px;
     overflow: hidden;
+
+    @media(max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const TileTopLine = styled.div`
