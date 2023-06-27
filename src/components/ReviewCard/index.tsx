@@ -22,7 +22,7 @@ interface Props {
 const ReviewCard = (props: Props) => {
   return (
        <ReviewCardStyle>
-         hhhhhhh
+        
        </ReviewCardStyle>
   )
 }

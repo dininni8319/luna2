@@ -110,7 +110,6 @@ const Profile = () => {
                 <Flex align='start'>
                      <Flex smdirection="column" width='35%' align='end'>
                         <Position>
-
                             <TileContainer width='250px'>
                                 <UserImage src="https://picsum.photos/200" />
                                 <h4>{`${profile ? profile?.name + "'" : 'Your'} profile`}</h4>
@@ -144,7 +143,7 @@ const Profile = () => {
                         <ReviewCard />
                     </Flex>
                     <Flex smdirection="column" align='start' width='35%' padding="0 0.6rem">
-                        <h4>About {profile?.name || profile?.email?.split("@")[0].toUpperCase()}</h4>
+                        <h4>ABOUT {profile?.name.toUpperCase() || profile?.email?.split("@")[0].toUpperCase()}</h4>
                         <Flex smdirection="column" align='start'>
                             <h4><b>Location</b></h4>
                             <TextStyle>{profile?.location}</TextStyle>

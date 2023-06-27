@@ -7,7 +7,6 @@ import { base_url } from '@/utilities/urls'
 import { SearchNavigation } from '@/components'
 import { useAuth } from '@/hooks/auth-hook'
 
-
 const Restaurants = () => {
     const { token } = useAuth()
     const { payload } = useFetch(`${base_url}/restaurant`, 'get',{
