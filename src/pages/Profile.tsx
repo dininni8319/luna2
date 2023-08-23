@@ -157,6 +157,14 @@ const Profile = () => {
                             <TextStyle>{profile?.description || 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt accusamus voluptatem iure! Repudiandae ab quidem amet obcaecati molestiae rem modi dolore, voluptate laborum quis illo nesciunt officia voluptatum quia sit'}</TextStyle>
                         </Flex>
                     </Flex>
+                    {/* {
+                       true && (
+                           <Flex smdirection="column" width='100%' padding="2rem 0" align="center">
+                                
+                               
+                           </Flex>
+                        )
+                    } */}
                 </Flex>
     
             </Flex>

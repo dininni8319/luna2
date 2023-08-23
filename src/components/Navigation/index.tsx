@@ -19,6 +19,7 @@ const Navigation = () => {
                 <li>
                     <Link to="/profile">Profile</Link>
                 </li>
+
                 <SignupButton />
             </NavLinksUl>
         </NavigationStyle>

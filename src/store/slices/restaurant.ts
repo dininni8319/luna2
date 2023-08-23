@@ -47,7 +47,7 @@ export const restaurantSlice = createSlice({
                 state.isSuccess = false
                 state.loading = false
                 state.message =
-                    action.payload.error.message || '. Something went wrong!'
+                    action.payload?.error.message || '. Something went wrong!'
             }
         )
     }

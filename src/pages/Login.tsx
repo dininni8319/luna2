@@ -25,7 +25,6 @@ const Login = () => {
     const dispatch = useAppDispatch()
     const { login } = useContext(AuthContext)
     const { message, loading, user } = useAppSelector((state) => state.login)
-    console.log("🚀 ~ file: Login.tsx:28 ~ Login ~ user:", user)
     const { inputs } = formState
 
     const formData: TLogin = {
@@ -33,13 +32,12 @@ const Login = () => {
         password: inputs.password.value
     }
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit =  (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         
         try {
             dispatch(signIn(formData))
         } catch (err) {
-            console.log(err, 'error')
             return
         }
         if (user.token) {

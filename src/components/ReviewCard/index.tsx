@@ -1,6 +1,5 @@
 import { TileContainer } from '@/style/tile'
 import styled from 'styled-components';
-import { rem } from 'polished'
 
 export const ReviewCardStyle = styled.div`
   width: 100%;
